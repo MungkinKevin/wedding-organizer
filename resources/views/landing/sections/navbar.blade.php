@@ -3,9 +3,9 @@
 
         {{-- Logo --}}
         <a href="/" class="flex items-center gap-3">
-            <div class="w-12 h-12 border border-gray-300 flex items-center justify-center">
-                <span class="text-gray-400 text-xs">Logo</span>
-            </div>
+            <img src="{{ asset('image/logo copy.png') }}"
+            alt="WO SATRIA"
+            class="w-16 h-16 object-contain">
 
             <div>
                 <div class="text-xl font-bold text-gray-900">

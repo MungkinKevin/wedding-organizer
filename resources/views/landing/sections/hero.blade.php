@@ -37,23 +37,13 @@
 
 
             {{-- Hero Image / Carousel Placeholder --}}
-            <div>
-                <div class="relative">
-
-                    <div class="w-full aspect-[16/9] border border-gray-300
-                                bg-gray-100 flex items-center justify-center">
-
-                        <div class="text-center text-gray-400">
-                            <div class="text-4xl mb-2">
-                                🖼️
-                            </div>
-
-                            <p class="text-sm">
-                                Foto Pernikahan
-                            </p>
-                        </div>
-
-                    </div>
+            <div class="w-full h-full overflow-hidden rounded-lg">
+    <img
+        src="{{ asset('image/foto pernikahan.png') }}"
+        alt="Foto Pernikahan WO SATRIA"
+        class="w-full h-full object-cover"
+    >
+</div>
 
                     {{-- Carousel Indicator --}}
                     <div class="flex justify-center gap-2 mt-4">
