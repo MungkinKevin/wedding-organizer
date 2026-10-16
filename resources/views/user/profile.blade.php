@@ -43,7 +43,7 @@
                         <div class="col-4 text-muted">Hari ulang tahun</div>
                         <div class="col-8 text-muted fst-italic" style="font-size: 14px;">Belum diatur</div>
                     </div>
-
+        
                     <hr class="text-muted opacity-25 my-4">
 
                     <!-- Informasi Kontak -->
