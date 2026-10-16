@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 #[Fillable(['title', 'photo'])]
 class Galeri extends Model
 {
-    //
+    protected $table = 'galeri';
 }

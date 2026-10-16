@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 #[Fillable(['client_name', 'content', 'photo', 'rating'])]
 class Testimoni extends Model
 {
-    //
+    protected $table = 'testimoni';
 }

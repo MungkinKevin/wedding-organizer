@@ -4,9 +4,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserDashboardController;
 
-Route::get('/', function () { 
-    return view('welcome');
-});
 
 Auth::routes();
 
@@ -25,3 +22,6 @@ Route::get('/user/dashboard', [UserDashboardController::class, 'index'])->name('
 Route::get('/user/profile', function () {
     return view('user.profile');
 })->name('user.profile');
+Route::get('/', function () {
+    return view('landing.index');
+});
