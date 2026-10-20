@@ -25,7 +25,7 @@
         <div class="group aspect-[4/3] overflow-hidden rounded-lg
                     border border-gray-200 bg-pink-50
                     hover:shadow-lg transition duration-200">
-
+  
             <div class="w-full h-full relative">
                 <img
     src="{{ asset('image/pernikahan ' . $i . '.png') }}"
