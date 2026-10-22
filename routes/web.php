@@ -3,18 +3,23 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserDashboardController;
-
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PaketController;
 
 Auth::routes();
 
 // bisa diakses SEMUA user yang sudah login
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // untuk ADMIN 
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin/dashboard', function () {
-        return 'Selamat Datang di Dashboard Admin Satria Wedding Organizer!';
-    });
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])
+    ->name('admin.dashboard');
+
+    Route::resource('admin/paket', PaketController::class)
+        ->except(['show'])
+        ->names('admin.paket');
 });
 
 
