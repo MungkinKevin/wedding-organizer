@@ -7,6 +7,11 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PaketController;
 use App\Http\Controllers\AdminBookingController;
 use App\Http\Controllers\AdminTestimoniController;
+use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\UserBookingController;
+use App\Http\Controllers\UserPasswordController;
+use App\Http\Controllers\UserTestimoniController;
+use App\Http\Controllers\LandingController;
 Auth::routes();
 
 // Redirect /home berdasarkan role user
