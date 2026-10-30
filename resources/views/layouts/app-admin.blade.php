@@ -160,12 +160,12 @@
                         <i class="bi bi-gem me-2"></i>
                         <span class="nav-label">Kelola Paket Wedding</span>
                     </a>
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('admin.booking.index') }}" class="nav-link {{ request()->routeIs('admin.booking.*') ? 'active' : '' }}">
                         <i class="bi bi-calendar-check me-2"></i>
                         <span class="nav-label">Booking</span>
                     </a>
 
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('admin.testimoni.index')}}" class="nav-link {{ request()->routeIs('admin.testimoni.*') ? 'active' : '' }}">
                         <i class="bi bi-chat-square-heart me-2"></i>
                         <span class="nav-label">Testimoni</span>
                     </a>

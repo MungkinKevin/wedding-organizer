@@ -69,7 +69,7 @@
                     </div>
 
                     <div class="text-muted small">Total Booking</div>
-                    <h3 class="fw-bold mb-0">--</h3>
+                    <h3 class="fw-bold mb-0">{{ $totalBooking }}</h3>
                     <small class="text-muted">Seluruh pemesanan</small>
                 </div>
             </div>
@@ -86,7 +86,7 @@
                     </div>
 
                     <div class="text-muted small">Booking Menunggu</div>
-                    <h3 class="fw-bold mb-0">--</h3>
+                    <h3 class="fw-bold mb-0">{{ $totalPendingBooking }}</h3>
                     <small class="text-muted">Menunggu konfirmasi</small>
                 </div>
             </div>

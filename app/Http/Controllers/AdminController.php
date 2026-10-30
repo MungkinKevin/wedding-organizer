@@ -11,6 +11,14 @@ class AdminController extends Controller
     {
         $totalPaket = Paket::count();
 
-        return view('admin.dashboard', compact('totalPaket'));
+        $totalBooking = \App\Models\Booking::count();
+
+        $totalPendingBooking = \App\Models\Booking::where('status', 'pending')->count();
+        
+        return view('admin.dashboard', compact(
+            'totalPaket',
+            'totalBooking',
+            'totalPendingBooking'
+        ));
     }
 }

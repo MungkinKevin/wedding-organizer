@@ -9,4 +9,10 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 class Testimoni extends Model
 {
     protected $table = 'testimoni';
+
+    protected $fillable = [
+        'client_name',
+        'content',
+        'rating',
+    ];
 }
