@@ -1,10 +1,9 @@
-
 @extends('layouts.app-admin')
 
 @section('title', 'Dashboard Admin - WO Satria')
 
 @section('content')
-    {{-- Banner sambutan --}}
+    
     <div class="welcome-banner text-white rounded-4 p-4 p-md-5 mb-4 shadow-sm">
         <div class="d-flex flex-column flex-md-row
                     justify-content-between align-items-md-center gap-3">
@@ -31,7 +30,7 @@
         </div>
     </div>
 
-    {{-- Statistik --}}
+    
     <section id="ringkasan" class="mb-4">
         <div class="mb-3">
             <h5 class="fw-bold mb-1">Ringkasan Dashboard</h5>
@@ -53,7 +52,7 @@
                     </div>
 
                     <div class="text-muted small">Total Paket Wedding</div>
-                    <h3 class="fw-bold mb-0">--</h3>
+                    <h3 class="fw-bold mb-0">{{ $totalPaket }}</h3>
                     <small class="text-muted">Data paket tersedia</small>
                 </div>
             </div>
