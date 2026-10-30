@@ -57,40 +57,42 @@
                 </div>
 
                 <ul class="nav nav-pills flex-column">
-                    <li class="nav-item">
-                        <a href="{{ route('user.dashboard') }}" class="nav-link {{ request()->routeIs('user.dashboard') ? 'active' : '' }}">
-                            <i class="bi bi-grid-1x2-fill me-2"></i> Beranda
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="bi bi-gem me-2"></i> Lihat Paket Wedding
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="bi bi-calendar-plus me-2"></i> Booking Paket
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="bi bi-journal-check me-2"></i> Lihat Booking Saya
-                        </a>
-                    </li>
-                </ul>
+    <li class="nav-item">
+        <a href="{{ route('user.dashboard') }}" class="nav-link {{ request()->routeIs('user.dashboard') ? 'active' : '' }}">
+            <i class="bi bi-grid-1x2-fill me-2"></i> Beranda
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{{ url('/') }}" class="nav-link">
+            <i class="bi bi-gem me-2"></i> Lihat Paket Wedding
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{{ route('user.booking.create') }}" class="nav-link {{ request()->routeIs('user.booking.create') ? 'active' : '' }}">
+            <i class="bi bi-calendar-plus me-2"></i> Booking Paket
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{{ route('user.booking.index') }}" class="nav-link {{ request()->routeIs('user.booking.index') ? 'active' : '' }}">
+            <i class="bi bi-journal-check me-2"></i> Riwayat Booking
+        </a>
+    </li>
+</ul>
             </div>
 
             <div class="pt-3 border-top d-flex align-items-center justify-content-between">
-                <div class="d-flex align-items-center gap-2">
+                <!-- Bungkus bagian ini dengan tag <a> agar bisa diklik ke halaman profil -->
+                <a href="{{ route('user.profile') }}" class="d-flex align-items-center gap-2 text-decoration-none" title="Lihat Profil">
                     <div class="rounded-circle bg-danger-subtle text-danger font-bold d-flex align-items-center justify-content-center" style="width: 35px; height: 35px; font-weight: bold;">
-                        
+                        {{ substr(Auth::user()->name ?? 'U', 0, 1) }}
                     </div>
                     <div style="line-height: 1.2;">
                         <span class="d-block fw-bold text-dark text-truncate" style="max-width: 110px; font-size: 13px;">{{ Auth::user()->name ?? 'User Client' }}</span>
                         <small class="text-muted" style="font-size: 11px;">{{ Auth::user()->email ?? 'user@gmail.com' }}</small>
                     </div>
-                </div>
-                <!-- Tombol Logout -->
+                </a>
+
+                
                 <a href="{{ route('logout') }}" class="text-secondary" title="Keluar" 
                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                    <i class="bi bi-box-arrow-right"></i>

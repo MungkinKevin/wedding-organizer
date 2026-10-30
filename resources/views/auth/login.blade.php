@@ -13,10 +13,10 @@
                 <div class="card shadow-lg border-0 overflow-hidden" style="background: rgba(255, 255, 255, 0.95);">
                     
                     <div class="row g-0">
-                        <!-- KOLOM KIRI (Form Login) -->
+                        <!-- KOLOM KIRI -->
                         <div class="col-md-6 d-flex flex-column justify-content-center">
                             <div class="card-body p-4 p-md-5">
-                                <h4 class="text-center fw-bold mb-4" style="color: #9b7599;">Login</h4>
+                                <h4 class="text-center fw-bold mb-4" style="color: #130311;">Login</h4>
 
                                 <form method="POST" action="{{ route('login') }}">
                                     @csrf
@@ -58,7 +58,7 @@
                                     </div>
 
                                     <div class="d-grid mb-2">
-                                        <button type="submit" class="btn fw-bold py-2" style="background-color: #dfcbd7; color: white;">
+                                        <button type="submit" class="btn text-white fw-bold w-100" style="background-color: #ff69b4; border-color: #ff69b4;">
                                             {{ __('Login') }}
                                         </button>
                                     </div>
@@ -66,11 +66,10 @@
                             </div>
                         </div>
 
-                        <!-- KOLOM KANAN (Banner Gambar & Teks) -->
+                        <!-- KOLOM KANAN -->
                         <div class="col-md-6 d-none d-md-flex flex-column justify-content-center align-items-center text-center p-4 position-relative"
                              style="min-height: 520px; background: url('{{ asset('images/backkananlog.png') }}') center/cover no-repeat";>
                             
-                            <!-- Pembungkus Teks Agar Pas Di Tengah Bingkai Putih -->
                             <div style="max-width: 250px;">
                                 <h3 class="fw-bold mb-4" style="color: #b8860b; font-family: serif;">Satria Wedding Organizer</h3>
                                 <p class="fst-italic mb-2" style="color: #8b5a2b; font-size: 0.85rem;">Wujudkan Pernikahan Impian Anda</p>
