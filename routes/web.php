@@ -38,6 +38,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('admin/galeri', AdminGaleriController::class)
         ->except(['show'])
         ->names('admin.galeri');
+
+    Route::patch('/admin/booking/{booking}/details', [
+        AdminBookingController::class, 'updateDetails'
+    ])->name('admin.booking.updateDetails');
 });
 
 
