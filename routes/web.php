@@ -8,7 +8,13 @@ use App\Http\Controllers\PaketController;
 use App\Http\Controllers\AdminBookingController;
 use App\Http\Controllers\AdminTestimoniController;
 use App\Http\Controllers\AdminGaleriController;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\LandingController;
+
 Auth::routes();
+// Landing Page
+Route::get('/', [LandingController::class, 'index'])
+    ->name('landing');
 
 // bisa diakses SEMUA user yang sudah login
 
@@ -45,10 +51,25 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 });
 
 
-Route::get('/user/dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard');
-Route::get('/user/profile', function () {
-    return view('user.profile');
-})->name('user.profile');
-Route::get('/', function () {
-    return view('landing.index');
+// Route khusus USER yang sudah login
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/user/dashboard', [UserDashboardController::class, 'index'])
+        ->name('user.dashboard');
+
+    Route::get('/user/profile', function () {
+        return view('user.profile');
+    })->name('user.profile');
+
+});
+
+// Route Booking
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/booking/{id}', [BookingController::class, 'create'])
+        ->name('booking.create');
+
+    Route::post('/booking/{id}', [BookingController::class, 'store'])
+        ->name('booking.store');
+
 });
