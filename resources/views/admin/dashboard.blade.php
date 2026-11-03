@@ -103,7 +103,7 @@
                     </div>
 
                     <div class="text-muted small">Total Testimoni</div>
-                    <h3 class="fw-bold mb-0">--</h3>
+                    <h3 class="fw-bold mb-0">{{ $totalTestimoni }}</h3>
                     <small class="text-muted">Ulasan pelanggan</small>
                 </div>
             </div>
