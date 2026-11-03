@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PaketController;
 use App\Http\Controllers\AdminBookingController;
 use App\Http\Controllers\AdminTestimoniController;
+use App\Http\Controllers\AdminGaleriController;
 Auth::routes();
 
 // bisa diakses SEMUA user yang sudah login
@@ -33,6 +34,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('admin/testimoni', AdminTestimoniController::class)
         ->except(['show'])
         ->names('admin.testimoni');
+
+    Route::resource('admin/galeri', AdminGaleriController::class)
+        ->except(['show'])
+        ->names('admin.galeri');
 });
 
 

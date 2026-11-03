@@ -61,22 +61,21 @@
                                     </td>
 
                                     <td style="min-width: 220px;">
+                                        @php
+                                            $facilities = array_filter(
+                                                array_map('trim', explode(',', $item->facilities ?? ''))
+                                            );
+                                        @endphp
+
                                         <ul class="list-unstyled mb-0">
-                                            @foreach ([
-                                                $item->facility1,
-                                                $item->facility2,
-                                                $item->facility3,
-                                                $item->facility4,
-                                                $item->facility5,
-                                                $item->facility6,
-                                            ] as $facility)
-                                                @if ($facility)
-                                                    <li class="mb-1">
-                                                        <i class="bi bi-check-circle-fill text-success me-1"></i>
-                                                        {{ $facility }}
-                                                    </li>
-                                                @endif
-                                            @endforeach
+                                            @forelse ($facilities as $facility)
+                                                <li class="mb-1">
+                                                    <i class="bi bi-check-circle-fill text-success me-1"></i>    
+                                                    {{ $facility }}
+                                                </li>
+                                            @empty
+                                                <li class="text-muted">Belum ada fasilitas</li>
+                                            @endforelse
                                         </ul>
                                     </td>
 

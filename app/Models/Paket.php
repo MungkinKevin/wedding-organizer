@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 
-#[Fillable(['name', 'price', 'description', 'facility1', 'facility2', 'facility3', 'facility4', 'facility5', 'facility6'])]
+#[Fillable(['name', 'price', 'description', 'facilities'])]
 class Paket extends Model
 {
     protected $table = 'paket';

@@ -9,6 +9,7 @@ use Illuminate\Validation\Rule;
 class AdminBookingController extends Controller
 {
     public function index() {
+        
         $bookings = Booking::with(['user', 'paket'])
             ->latest()
             ->paginate(10);
@@ -24,28 +25,42 @@ class AdminBookingController extends Controller
             'bookingPending'
         ));
     }
-    
-    public function updateStatus(Request $request, Booking $booking)
-{
-    $validated = $request->validate([
-        'status' => [
-            'required',
-            Rule::in([
-                'pending',
-                'diproses',
-                'dikonfirmasi',
-                'selesai',
-                'dibatalkan',
-            ]),
-        ],
-    ]);
 
-    $booking->update([
-        'status' => $validated['status'],
-    ]);
+    public function updateStatus(Request $request, Booking $booking) {
 
-    return redirect()
-        ->route('admin.booking.index')
-        ->with('success', 'Status booking berhasil diperbarui.');
+        $validated = $request->validate([
+            'status' => [
+                'required',
+                Rule::in([
+                    'pending',
+                    'diproses',
+                    'dikonfirmasi',
+                    'selesai',
+                    'dibatalkan',
+                ]),
+            ],
+        ]);
+
+        $booking->update([
+            'status' => $validated['status'],
+        ]);
+
+        return redirect()
+            ->route('admin.booking.index')
+            ->with('success', 'Status booking berhasil diperbarui.');
+    }
+
+    public function updateDetails(Request $request, Booking $booking) {
+
+        $validated = $request->validate([
+            'notes' => 'nullable|string',
+            'final_price' => 'nullable|numeric|min:0',
+        ]);
+
+        $booking->update($validated);
+
+        return redirect()
+            ->route('admin.booking.index')
+            ->with('success', 'Detail booking berhasil diperbarui.');
     }
 }

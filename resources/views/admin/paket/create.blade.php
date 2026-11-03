@@ -79,21 +79,30 @@
 
                 <h5 class="fw-bold mb-1">Fasilitas Paket</h5>
                 <p class="text-muted small mb-3">
-                    Isi hingga enam fasilitas. Kolom yang tidak digunakan boleh dikosongkan.
+                    Masukkan fasilitas paket dan pisahkan setiap fasilitas menggunakan koma (,).
                 </p>
-                @for ($i = 1; $i <= 6; $i++)
-                    <div class="mb-3">
-                        <label for="facility{{ $i }}" class="form-label fw-semibold">
-                            Fasilitas {{ $i }}
-                        </label>
-                        <input type="text"
-                               id="facility{{ $i }}"
-                               name="facility{{ $i }}"
-                               class="form-control"
-                               value="{{ old('facility' . $i) }}"
-                               placeholder="Contoh: Dekorasi pelaminan">
+
+                <div class="mb-3">
+                    <label for="facilities" class="form-label fw-semibold">
+                        Daftar Fasilitas
+                    </label>
+
+                    <textarea 
+                            name="facilities" 
+                            id="facilities"
+                            rows="4"
+                            class="form-control @error('facilities') is-invalid @enderror"
+                            placeholder="Contoh : Dekorasi pelaminan, Katering, Dokumentasi, MC"
+                    >{{ old('facilities')}}</textarea>
+
+                    <div class="form-text">
+                        Pisahkan setiap fasilitas menggunakan koma (,).
                     </div>
-                @endfor
+
+                    @error('facilities')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
 
                 <div class="d-flex flex-column flex-sm-row justify-content-end gap-2 mt-4">
                     <a href="{{ route('admin.paket.index') }}"
