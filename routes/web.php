@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\UserDashboardController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PaketController;
@@ -10,20 +11,34 @@ use App\Http\Controllers\AdminTestimoniController;
 use App\Http\Controllers\AdminGaleriController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\UserBookingController;
 
+// Authentication
 Auth::routes();
+
 // Landing Page
 Route::get('/', [LandingController::class, 'index'])
     ->name('landing');
 
-// bisa diakses SEMUA user yang sudah login
+// Redirect /home berdasarkan role
+Route::get('/home', function () {
+    $user = Auth::user();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    if ($user && $user->role === 'admin') {
+        return redirect()->route('admin.dashboard');
+    }
 
-// untuk ADMIN 
+    return redirect()->route('user.dashboard');
+})->middleware(['auth'])->name('home');
+
+// ========================
+// ADMIN ROUTES
+// ========================
 Route::middleware(['auth', 'role:admin'])->group(function () {
+
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])
-    ->name('admin.dashboard');
+        ->name('admin.dashboard');
 
     Route::resource('admin/paket', PaketController::class)
         ->except(['show'])
@@ -31,11 +46,16 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::get('/admin/booking', [AdminBookingController::class, 'index'])
         ->name('admin.booking.index');
-    
+
     Route::patch('/admin/booking/{booking}/status', [
         AdminBookingController::class,
         'updateStatus'
     ])->name('admin.booking.updateStatus');
+
+    Route::patch('/admin/booking/{booking}/details', [
+        AdminBookingController::class,
+        'updateDetails'
+    ])->name('admin.booking.updateDetails');
 
     Route::resource('admin/testimoni', AdminTestimoniController::class)
         ->except(['show'])
@@ -44,14 +64,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('admin/galeri', AdminGaleriController::class)
         ->except(['show'])
         ->names('admin.galeri');
-
-    Route::patch('/admin/booking/{booking}/details', [
-        AdminBookingController::class, 'updateDetails'
-    ])->name('admin.booking.updateDetails');
 });
 
-
-// Route khusus USER yang sudah login
+// ========================
+// USER ROUTES
+// ========================
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/user/dashboard', [UserDashboardController::class, 'index'])
@@ -61,9 +78,37 @@ Route::middleware(['auth'])->group(function () {
         return view('user.profile');
     })->name('user.profile');
 
+    // Update profil
+    Route::post('/user/profile/update', [UserProfileController::class, 'update'])
+        ->name('user.profile.update');
+
+    // Update foto profil
+    Route::post('/user/profile/photo', [UserProfileController::class, 'updatePhoto'])
+        ->name('user.profile.photo');
+
+    // Update password
+    Route::put('/user/password', [UserProfileController::class, 'updatePassword'])
+        ->name('password.update');
 });
 
-// Route Booking
+// ========================
+// USER BOOKING
+// ========================
+Route::middleware(['auth'])->prefix('user')->name('user.')->group(function () {
+
+    Route::get('/booking', [UserBookingController::class, 'index'])
+        ->name('booking.index');
+
+    Route::get('/booking/create', [UserBookingController::class, 'create'])
+        ->name('booking.create');
+
+    Route::post('/booking', [UserBookingController::class, 'store'])
+        ->name('booking.store');
+});
+
+// ========================
+// BOOKING DARI LANDING PAGE
+// ========================
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/booking/{id}', [BookingController::class, 'create'])
@@ -71,5 +116,4 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/booking/{id}', [BookingController::class, 'store'])
         ->name('booking.store');
-
 });

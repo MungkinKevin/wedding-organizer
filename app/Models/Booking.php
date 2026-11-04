@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 
 #[Fillable(['user_id', 'paket_id', 'event_date', 'notes', 'final_price', 'status'])]
 class Booking extends Model
+
 {
     protected $table = 'booking';
-
     public function user() {
         return $this->belongsTo(User::class);
     }
