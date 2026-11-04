@@ -3,13 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Paket;
+use App\Models\Testimoni;
+use App\Models\Galeri;
 
 class LandingController extends Controller
 {
     public function index()
     {
-        $pakets = Paket::all();
+        $pakets = Paket::orderBy('harga', 'asc')->get();
 
-        return view('landing.index', compact('pakets'));
+        $testimonis = Testimoni::all();
+
+        $galeris = Galeri::all();
+
+        return view('landing.index', compact(
+            'pakets',
+            'testimonis',
+            'galeris'
+        ));
     }
 }

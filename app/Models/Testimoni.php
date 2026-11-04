@@ -3,10 +3,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Attributes\Fillable;
 
-#[Fillable(['client_name', 'content', 'photo', 'rating'])]
 class Testimoni extends Model
 {
     protected $table = 'testimoni';
+
+    protected $primaryKey = 'id_testimoni';
+
+    protected $fillable = [
+        'nama_client',
+        'isi_testimoni',
+        'foto',
+        'rating',
+    ];
 }
