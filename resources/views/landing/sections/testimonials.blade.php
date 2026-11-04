@@ -44,14 +44,14 @@
 
                     {{-- Isi Testimoni --}}
                     <p class="text-gray-600 leading-relaxed">
-                        "{{ $testimoni->isi_testimoni }}"
+                        "{{ $testimoni->content }}"
                     </p>
 
                     {{-- Nama Client --}}
                     <div class="mt-6 pt-4 border-t border-gray-200">
 
                         <p class="font-semibold text-gray-900">
-                            {{ $testimoni->nama_client }}
+                            {{ $testimoni->client_name }}
                         </p>
 
                         <p class="text-sm text-gray-500 mt-1">

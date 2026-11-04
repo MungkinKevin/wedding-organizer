@@ -8,12 +8,10 @@ class Testimoni extends Model
 {
     protected $table = 'testimoni';
 
-    protected $primaryKey = 'id_testimoni';
-
     protected $fillable = [
-        'nama_client',
-        'isi_testimoni',
-        'foto',
+        'client_name',
+        'content',
+        'photo',
         'rating',
     ];
 }

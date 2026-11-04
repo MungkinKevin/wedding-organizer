@@ -8,10 +8,8 @@ class Galeri extends Model
 {
     protected $table = 'galeri';
 
-    protected $primaryKey = 'id_galeri';
-
     protected $fillable = [
-        'judul',
-        'foto',
+        'title',
+        'photo',
     ];
 }

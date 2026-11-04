@@ -25,10 +25,10 @@ class BookingController extends Controller
         $paket = Paket::findOrFail($id);
 
         Booking::create([
-            'id_user' => auth()->id(),
-            'id_paket' => $paket->id_paket,
-            'tanggal_acara' => $request->tanggal_acara,
-            'catatan' => $request->catatan,
+            'user_id' => auth()->id(),
+            'paket_id' => $paket->id,
+            'event_date' => $request->tanggal_acara,
+            'notes' => $request->catatan,
             'status' => 'pending',
         ]);
 

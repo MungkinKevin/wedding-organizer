@@ -29,8 +29,8 @@
                     <div class="w-full h-full relative">
 
                         <img
-                            src="{{ asset('image/' . $galeri->foto) }}"
-                            alt="{{ $galeri->judul }}"
+                            src="{{ asset('image/' . $galeri->photo) }}"
+                            alt="{{ $galeri->title }}"
                             class="w-full h-full object-cover
                                    transition duration-300
                                    group-hover:scale-105"

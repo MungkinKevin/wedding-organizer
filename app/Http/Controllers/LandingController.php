@@ -10,10 +10,13 @@ class LandingController extends Controller
 {
     public function index()
     {
-        $pakets = Paket::orderBy('harga', 'asc')->get();
+        // Mengambil data paket berdasarkan harga termurah
+        $pakets = Paket::orderBy('price', 'asc')->get();
 
+        // Mengambil seluruh data testimoni
         $testimonis = Testimoni::all();
 
+        // Mengambil seluruh data galeri
         $galeris = Galeri::all();
 
         return view('landing.index', compact(

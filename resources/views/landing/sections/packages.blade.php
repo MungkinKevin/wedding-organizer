@@ -24,10 +24,10 @@
 
                 @php
                     $fasilitas = array_filter(
-                        array_map('trim', explode(',', $paket->fasilitas ?? ''))
+                        array_map('trim', explode(',', $paket->facilities ?? ''))
                     );
 
-                    $isPopular = $paket->nama_paket === 'Gold';
+                    $isPopular = $paket->name === 'Gold';
                 @endphp
 
                 <div class="relative min-w-0 border rounded-lg p-5 sm:p-6
@@ -52,18 +52,18 @@
                     {{-- Nama Paket --}}
                     <h3 class="text-xl font-bold text-gray-900
                         {{ $isPopular ? 'mt-3' : '' }}">
-                        {{ $paket->nama_paket }}
+                        {{ $paket->name }}
                     </h3>
 
                     {{-- Deskripsi --}}
                     <p class="text-gray-500 mt-2 break-words">
-                        {{ $paket->deskripsi }}
+                        {{ $paket->description }}
                     </p>
 
                     {{-- Harga --}}
                     <div class="mt-6">
                         <span class="text-xl sm:text-2xl font-bold text-gray-900 break-words">
-                            Rp{{ number_format($paket->harga, 0, ',', '.') }}
+                            Rp{{ number_format($paket->price, 0, ',', '.') }}
                         </span>
                     </div>
 
@@ -90,11 +90,11 @@
                     <button
                         type="button"
                         onclick="showPackage(
-                            @js($paket->nama_paket),
-                            @js($paket->deskripsi),
-                            @js(number_format($paket->harga, 0, ',', '.')),
+                            @js($paket->name),
+                            @js($paket->description),
+                            @js(number_format($paket->price, 0, ',', '.')),
                             @js(array_values($fasilitas)),
-                            @js(route('booking.create', $paket->id_paket))
+                            @js(route('booking.create', $paket->id))
                         )"
                         class="w-full mt-6 px-5 py-3 border rounded-md
                             font-semibold transition
@@ -136,9 +136,7 @@
                     onclick="closePackage()"
                     aria-label="Tutup detail paket"
                     class="text-gray-500 hover:text-gray-900 text-xl shrink-0">
-
                     ✕
-
                 </button>
 
             </div>
@@ -176,9 +174,7 @@
                         class="block sm:inline-block text-center mt-6 px-6 py-3
                             bg-pink-600 text-white rounded-md font-semibold
                             hover:bg-pink-700 transition">
-
                         Booking Sekarang
-
                     </a>
 
                 </div>
@@ -189,7 +185,6 @@
 
     </div>
 </section>
-
 
 <script>
     function showPackage(title, description, price, services, bookingUrl) {
@@ -207,13 +202,9 @@
         serviceList.innerHTML = '';
 
         services.forEach(service => {
-
             const li = document.createElement('li');
-
             li.textContent = '✓ ' + service;
-
             serviceList.appendChild(li);
-
         });
 
         document.getElementById('booking-button').href = bookingUrl;
@@ -226,7 +217,6 @@
             behavior: 'smooth',
             block: 'center'
         });
-
     }
 
     function closePackage() {

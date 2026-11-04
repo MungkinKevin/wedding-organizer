@@ -35,16 +35,16 @@
 
                 <div>
                     <h3 class="text-lg font-semibold text-gray-900">
-                        {{ $paket->nama_paket }}
+                        {{ $paket->name }}
                     </h3>
 
                     <p class="text-gray-600 mt-1">
-                        {{ $paket->deskripsi }}
+                        {{ $paket->description }}
                     </p>
                 </div>
 
                 <span class="text-pink-600 font-bold text-lg whitespace-nowrap">
-                    Rp{{ number_format($paket->harga, 0, ',', '.') }}
+                    Rp{{ number_format($paket->price, 0, ',', '.') }}
                 </span>
 
             </div>
@@ -57,7 +57,7 @@
 
                 <ul class="space-y-2 text-sm text-gray-600">
 
-                    @foreach (explode(',', $paket->fasilitas ?? '') as $item)
+                    @foreach (explode(',', $paket->facilities ?? '') as $item)
                         @if (trim($item) !== '')
                             <li>✓ {{ trim($item) }}</li>
                         @endif
@@ -77,7 +77,7 @@
             </h2>
 
             <form
-                action="{{ route('booking.store', $paket->id_paket) }}"
+                action="{{ route('booking.store', $paket->id) }}"
                 method="POST">
 
                 @csrf
@@ -129,9 +129,9 @@
                         rows="4"
                         placeholder="Tuliskan kebutuhan atau permintaan tambahan..."
                         class="w-full border border-gray-300 rounded-md px-4 py-3
-                        focus:outline-none focus:ring-2 focus:ring-pink-500">{{ old('catatan') }}</textarea>
+                        focus:outline-none focus:ring-2 focus:ring-pink-500">{{ old('notes') }}</textarea>
 
-                    @error('catatan')
+                    @error('notes')
                         <p class="text-red-500 text-sm mt-2">
                             {{ $message }}
                         </p>
