@@ -81,7 +81,7 @@
                                 <th>Paket</th>
                                 <th>Tanggal</th>
                                 <th>Status</th>
-                                <th>Catatan</th>
+                                <th style="min-width: 280px;">Detail Booking</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -136,11 +136,61 @@
                                     </td>
 
                                     <td class="min-width: 180px;">
-                                        {{ $booking->notes ?? '-' }}
+                                        <form action="{{ route('admin.booking.updateDetails', $booking->id) }}" method="POST">
+                                            
+                                            @csrf
+                                            @method('PATCH')
+
+                                            <div class="mb-2">
+                                                <label class="form-label small fw-semibold">
+                                                    Catatan Tambahan
+                                                </label>
+
+                                                <textarea 
+                                                name="notes" 
+                                                rows="3"
+                                                class="form-control form-control-sm"
+                                                placeholder="Contoh: Tambah kursi 50, diskon 5%, request menu..."
+                                                >{{ old('notes', $booking->notes) }}</textarea>
+                                            </div>
+
+                                            <div class="mb-2">
+                                                <label class="form-label small fw-semibold">
+                                                    Harga Akhir (Rp)
+                                                </label>
+
+                                                <input
+                                                    type="number"
+                                                    name="final_price"
+                                                    class="form-control form-control-sm"
+                                                    min="0"
+                                                    step="0.01"
+                                                    value="{{ old('final_price', $booking->final_price) }}"
+                                                    placeholder="Masukkan harga akhir"
+                                                >
+                                            </div>
+
+                                            <button type="submit" class="btn btn-sm btn-success w-100">
+                                                <i class="bi bi-save me-1"></i>    
+                                                Simpan Detail
+                                            </button>
+                                        </form>
+
+                                        <div class="small text-muted mt-2">
+                                            Harga akhir:
+                                            @if ($booking->final_price !== null)
+                                                <strong class="text-success">
+                                                    Rp {{ number_format($booking->final_price, 0, ',', '.') }}
+                                                </strong>
+                                            @else
+                                                Belum ditentukan
+                                            @endif
+                                        </div>
                                     </td>
 
                                     <td style="min-width: 220px">
-                                        <form action=" {{ route('admin.booking.updateStatus', $booking->id )}}" method="POST">
+                                        <form action="{{ route('admin.booking.updateStatus', $booking->id )}}" method="POST">
+
                                             @csrf
                                             @method('PATCH')
 

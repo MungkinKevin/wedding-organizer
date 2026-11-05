@@ -9,4 +9,9 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 class Galeri extends Model
 {
     protected $table = 'galeri';
+
+    protected $fillable = [
+        'title',
+        'photo',
+    ];
 }

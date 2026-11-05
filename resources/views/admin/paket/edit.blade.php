@@ -77,26 +77,30 @@
 
                 <h5 class="fw-bold mb-1">Fasilitas Paket</h5>
                 <p class="text-muted small mb-3">
-                    Perbarui fasilitas yang tersedia. Kolom yang tidak digunakan boleh dikosongkan.
+                    Perbarui fasilitas paket. Pisahkan setiap fasilitas menggunakan koma (,).
                 </p>
 
-                @for ($i = 1; $i <= 6; $i++)
-                    @php
-                        $field = 'facility' . $i;
-                    @endphp
+                <div class="mb-3">
+                    <label for="facilities" class="form-label fw-semibold">
+                        Daftar Fasilitas
+                    </label>
 
-                    <div class="mb-3">
-                        <label for="{{ $field }}" class="form-label fw-semibold">
-                            Fasilitas {{ $i }}
-                        </label>
-                        <input type="text"
-                               id="{{ $field }}"
-                               name="{{ $field }}"
-                               class="form-control"
-                               value="{{ old($field, $paket->$field) }}"
-                               placeholder="Contoh: Dekorasi pelaminan">
+                    <textarea
+                        id="facilities"
+                        name="facilities"
+                        rows="4"
+                        class="form-control @error('facilities') is-invalid @enderror"
+                        placeholder="Contoh: Dekorasi pelaminan, Katering, Dokumentasi, MC"
+                    >{{ old('facilities', $paket->facilities) }}</textarea>
+
+                    <div class="form-text">
+                        Pisahkan setiap fasilitas menggunakan tanda koma (,).
                     </div>
-                @endfor
+
+                    @error('facilities')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
 
                 <div class="d-flex flex-column flex-sm-row justify-content-end gap-2 mt-4">
                     <a href="{{ route('admin.paket.index') }}"

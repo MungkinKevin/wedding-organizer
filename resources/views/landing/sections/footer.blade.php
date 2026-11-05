@@ -13,7 +13,7 @@
                 <p class="text-gray-400 text-sm leading-relaxed mt-4">
                     Wedding Organizer profesional yang siap membantu
                     mewujudkan pernikahan impian Anda menjadi momen
-                    yang tak terlupakan.
+                    yang tak terlupakan ASSEKKK.
                 </p>
             </div>
 

@@ -103,63 +103,8 @@
                     </div>
 
                     <div class="text-muted small">Total Testimoni</div>
-                    <h3 class="fw-bold mb-0">--</h3>
+                    <h3 class="fw-bold mb-0">{{ $totalTestimoni }}</h3>
                     <small class="text-muted">Ulasan pelanggan</small>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    {{-- Akses cepat --}}
-    <section class="mt-4">
-        <h5 class="fw-bold mb-3">Akses Cepat</h5>
-
-        <div class="row g-3">
-            <div class="col-12 col-md-4">
-                <div class="card border-0 shadow-sm rounded-4 h-100">
-                    <div class="card-body p-4">
-                        <i class="bi bi-gem text-theme-pink fs-2"></i>
-                        <h6 class="fw-bold mt-3">Kelola Paket</h6>
-                        <p class="text-muted small">
-                            Siapkan pengelolaan paket dan harga layanan.
-                        </p>
-                        <button type="button" class="btn btn-theme btn-sm"
-                                disabled>
-                            Segera tersedia
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 col-md-4">
-                <div class="card border-0 shadow-sm rounded-4 h-100">
-                    <div class="card-body p-4">
-                        <i class="bi bi-calendar-check text-theme-pink fs-2"></i>
-                        <h6 class="fw-bold mt-3">Kelola Booking</h6>
-                        <p class="text-muted small">
-                            Pantau pemesanan dan status booking pelanggan.
-                        </p>
-                        <button type="button" class="btn btn-theme btn-sm"
-                                disabled>
-                            Segera tersedia
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 col-md-4">
-                <div class="card border-0 shadow-sm rounded-4 h-100">
-                    <div class="card-body p-4">
-                        <i class="bi bi-images text-theme-pink fs-2"></i>
-                        <h6 class="fw-bold mt-3">Kelola Galeri</h6>
-                        <p class="text-muted small">
-                            Siapkan koleksi dokumentasi pernikahan.
-                        </p>
-                        <button type="button" class="btn btn-theme btn-sm"
-                                disabled>
-                            Segera tersedia
-                        </button>
-                    </div>
                 </div>
             </div>
         </div>

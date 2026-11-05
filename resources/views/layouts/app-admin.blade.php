@@ -170,7 +170,7 @@
                         <span class="nav-label">Testimoni</span>
                     </a>
 
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('admin.galeri.index')}}" class="nav-link {{ request()->routeIs('admin.galeri.*') ? 'active' : '' }}">
                         <i class="bi bi-images me-2"></i>
                         <span class="nav-label">Galeri</span>
                     </a>
