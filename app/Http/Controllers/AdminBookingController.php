@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Booking;
 use Illuminate\Validation\Rule;
+use App\Mail\BookingStatusNotification; // Jangan lupa tambahkan use ini di bagian atas file
+use Illuminate\Support\Facades\Mail;    // Dan use Mail ini
 
 class AdminBookingController extends Controller
 {
@@ -43,6 +45,14 @@ class AdminBookingController extends Controller
     $booking->update([
         'status' => $validated['status'],
     ]);
+
+    // 2. Muat relasi user agar datanya terbawa ke email
+    $booking->load('user');
+
+    // 3. Kirim Email otomatis ke user yang bersangkutan
+    if ($booking->user && $booking->user->email) {
+        Mail::to($booking->user->email)->send(new BookingStatusNotification($booking));
+    }
 
     return redirect()
         ->route('admin.booking.index')
