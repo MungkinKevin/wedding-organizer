@@ -1,3 +1,4 @@
+
 <section id="testimonials" class="bg-gray-50">
     <div class="max-w-7xl mx-auto px-6 py-16">
 
@@ -19,24 +20,10 @@
 
         </div>
 
-
-        {{-- Daftar Testimoni --}}
+        {{-- Daftar Testimoni dari Database --}}
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-            @foreach ([
-                [
-                    'name' => 'Merry & Rama',
-                    'text' => 'Pelayanannya sangat baik dan timnya profesional. Semua berjalan sesuai rencana.',
-                ],
-                [
-                    'name' => 'Zaki & Naya',
-                    'text' => 'Kami sangat terbantu dari persiapan sampai acara selesai. Terima kasih WO SATRIA!',
-                ],
-                [
-                    'name' => 'Galih & Agni',
-                    'text' => 'Konsep acaranya sesuai dengan yang kami inginkan dan koordinasinya sangat baik.',
-                ],
-            ] as $testimonial)
+            @forelse ($testimonis as $testimoni)
 
                 <div class="bg-white border border-gray-200 rounded-lg p-6
                             hover:border-pink-400 hover:bg-pink-50
@@ -44,19 +31,27 @@
 
                     {{-- Rating --}}
                     <div class="text-yellow-500 text-lg mb-4">
-                        ★★★★★
+
+                        @for ($i = 1; $i <= 5; $i++)
+                            @if ($i <= (int) $testimoni->rating)
+                                ★
+                            @else
+                                <span class="text-gray-300">★</span>
+                            @endif
+                        @endfor
+
                     </div>
 
                     {{-- Isi Testimoni --}}
                     <p class="text-gray-600 leading-relaxed">
-                        "{{ $testimonial['text'] }}"
+                        "{{ $testimoni->content }}"
                     </p>
 
-                    {{-- Nama --}}
+                    {{-- Nama Client --}}
                     <div class="mt-6 pt-4 border-t border-gray-200">
 
                         <p class="font-semibold text-gray-900">
-                            {{ $testimonial['name'] }}
+                            {{ $testimoni->client_name }}
                         </p>
 
                         <p class="text-sm text-gray-500 mt-1">
@@ -67,7 +62,15 @@
 
                 </div>
 
-            @endforeach
+            @empty
+
+                <div class="col-span-1 md:col-span-3 text-center py-10">
+                    <p class="text-gray-500">
+                        Belum ada testimoni tersedia.
+                    </p>
+                </div>
+
+            @endforelse
 
         </div>
 

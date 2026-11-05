@@ -8,7 +8,6 @@ use App\Models\Booking;
 
 class BookingController extends Controller
 {
-    // Menampilkan form booking berdasarkan paket
     public function create($id)
     {
         $paket = Paket::findOrFail($id);
@@ -16,12 +15,11 @@ class BookingController extends Controller
         return view('landing.booking', compact('paket'));
     }
 
-    // Menyimpan data booking
     public function store(Request $request, $id)
     {
         $request->validate([
-            'event_date' => 'required|date|after_or_equal:today',
-            'notes' => 'nullable|string',
+            'tanggal_acara' => 'required|date|after_or_equal:today',
+            'catatan' => 'nullable|string',
         ]);
 
         $paket = Paket::findOrFail($id);
@@ -29,8 +27,8 @@ class BookingController extends Controller
         Booking::create([
             'user_id' => auth()->id(),
             'paket_id' => $paket->id,
-            'event_date' => $request->event_date,
-            'notes' => $request->notes,
+            'event_date' => $request->tanggal_acara,
+            'notes' => $request->catatan,
             'status' => 'pending',
         ]);
 

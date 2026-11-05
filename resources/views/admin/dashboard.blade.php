@@ -109,4 +109,159 @@
             </div>
         </div>
     </section>
+
+    
+    {{-- Booking Aktif --}}
+    <section class="mt-5">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2 mb-3">
+            <div>
+                <h5 class="fw-bold mb-1">Booking Pending, Diproses, dan dikonfirmasi</h5>
+                <p class="text-muted small mb-0">
+                    Tekan "lihat semua booking" untuk melihat detail booking. <br>
+                    Pilih selesai jika acara selesai dan data harga final akan masuk ke pemasukan
+                </p>
+            </div>
+
+            <a href="{{ route('admin.booking.index') }}"
+               class="btn btn-outline-primary btn-sm rounded-3">
+                Lihat Semua Booking
+                <i class="bi bi-arrow-right ms-1"></i>
+            </a>
+        </div>
+
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show">
+                {{ session('success') }}
+                <button type="button" class="btn-close"
+                        data-bs-dismiss="alert"></button>
+            </div>
+        @endif
+
+        @if ($bookingsAktif->isEmpty())
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-body text-center py-5">
+                    <i class="bi bi-calendar-check display-5 text-muted"></i>
+                    <h6 class="fw-bold mt-3">Tidak Ada Booking Aktif</h6>
+                    <p class="text-muted mb-0">
+                        Belum ada booking yang perlu ditangani.
+                    </p>
+                </div>
+            </div>
+        @else
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="ps-3">Pelanggan</th>
+                                    <th>Paket</th>
+                                    <th>Tanggal Acara</th>
+                                    <th>Status</th>
+                                    <th>Catatan Admin</th>
+                                    <th>Harga Final</th>
+                                    <th class="text-center">Aksi</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach ($bookingsAktif as $booking)
+                                    <tr>
+                                        <td class="ps-3">
+                                            <div class="fw-semibold">
+                                                {{ $booking->user->name ?? 'User tidak ditemukan' }}
+                                            </div>
+                                            <small class="text-muted">
+                                                Booking #{{ $booking->id }}
+                                            </small>
+                                        </td>
+
+                                        <td>
+                                            {{ $booking->paket->name ?? 'Paket tidak ditemukan' }}
+                                        </td>
+
+                                        <td class="text-nowrap">
+                                            {{ \Carbon\Carbon::parse($booking->event_date)->format('d/m/Y') }}
+                                        </td>
+
+                                        <td>
+                                            <form action="{{ route('admin.booking.updateStatus', $booking->id) }}"
+                                                  method="POST">
+                                                @csrf
+                                                @method('PATCH')
+
+                                                <select name="status"
+                                                        class="form-select form-select-sm mb-2">
+                                                    <option value="pending"
+                                                        {{ $booking->status == 'pending' ? 'selected' : '' }}>
+                                                        Pending
+                                                    </option>
+
+                                                    <option value="diproses"
+                                                        {{ $booking->status == 'diproses' ? 'selected' : '' }}>
+                                                        Diproses
+                                                    </option>
+
+                                                    <option value="dikonfirmasi"
+                                                        {{ $booking->status == 'dikonfirmasi' ? 'selected' : '' }}>
+                                                        Dikonfirmasi
+                                                    </option>
+
+                                                    <option value="selesai"
+                                                        {{ $booking->status == 'selesai' ? 'selected' : '' }}>
+                                                        Selesai
+                                                    </option>
+
+                                                    <option value="dibatalkan"
+                                                        {{ $booking->status == 'dibatalkan' ? 'selected' : '' }}>
+                                                        Dibatalkan
+                                                    </option>
+                                                </select>
+
+                                                <button type="submit"
+                                                        class="btn btn-sm btn-primary w-100">
+                                                    Simpan Status
+                                                </button>
+                                            </form>
+                                        </td>
+
+                                        <td style="min-width: 180px;">
+                                            <form action="{{ route('admin.booking.updateDetails', $booking->id) }}"
+                                                  method="POST">
+                                                @csrf
+                                                @method('PATCH')
+
+                                                <textarea name="notes"
+                                                          class="form-control form-control-sm mb-2"
+                                                          rows="2"
+                                                          placeholder="Catatan admin">{{ $booking->notes }}</textarea>
+                                        </td>
+
+                                        <td style="min-width: 150px;">
+                                                <input type="number"
+                                                       name="final_price"
+                                                       class="form-control form-control-sm"
+                                                       min="0"
+                                                       step="0.01"
+                                                       value="{{ $booking->final_price }}"
+                                                       placeholder="Harga final">
+                                        </td>
+
+                                        <td class="text-center">
+                                                <button type="submit"
+                                                        class="btn btn-sm btn-success text-nowrap">
+                                                    <i class="bi bi-save me-1"></i>
+                                                    Simpan Detail
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        @endif
+    </section>
 @endsection

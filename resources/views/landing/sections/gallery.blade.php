@@ -1,3 +1,4 @@
+
 <section id="gallery" class="bg-white">
     <div class="max-w-7xl mx-auto px-6 py-16">
 
@@ -16,30 +17,44 @@
             </p>
         </div>
 
-        {{-- Gallery --}}
-        
-{{-- Gallery --}}
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {{-- Gallery dari Database --}}
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
-    @for ($i = 1; $i <= 4; $i++)
-        <div class="group aspect-[4/3] overflow-hidden rounded-lg
-                    border border-gray-200 bg-pink-50
-                    hover:shadow-lg transition duration-200">
-  
-            <div class="w-full h-full relative">
-                <img
-    src="{{ asset('image/pernikahan ' . $i . '.png') }}"
-    alt="Foto Pernikahan {{ $i }}"
-    class="w-full h-full object-cover transition duration-300 group-hover:scale-105"
-    loading="lazy"
->
-            </div>
+            @forelse ($galeris as $galeri)
+
+                <div class="group aspect-[4/3] overflow-hidden rounded-lg
+                            border border-gray-200 bg-pink-50
+                            hover:shadow-lg transition duration-200">
+
+                    <div class="w-full h-full relative">
+
+                        <img
+                            src="{{ asset('image/' . $galeri->photo) }}"
+                            alt="{{ $galeri->title }}"
+                            class="w-full h-full object-cover
+                                   transition duration-300
+                                   group-hover:scale-105"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+                </div>
+
+            @empty
+
+                <div class="col-span-1 sm:col-span-2 lg:col-span-4
+                            text-center py-10">
+
+                    <p class="text-gray-500">
+                        Belum ada foto galeri tersedia.
+                    </p>
+
+                </div>
+
+            @endforelse
 
         </div>
-    @endfor
-
-</div>
-
 
         {{-- Button --}}
         <div class="text-center mt-10">
@@ -48,7 +63,9 @@
                       rounded-md text-gray-800 font-semibold
                       hover:bg-pink-50 hover:border-pink-500
                       transition">
+
                 Lihat Semua Galeri
+
             </a>
         </div>
 
