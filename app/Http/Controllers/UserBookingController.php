@@ -9,22 +9,40 @@ use Illuminate\Support\Facades\Auth;
 
 class UserBookingController extends Controller
 {
-    // Menampilkan riwayat booking (mengarah ke riwayat.blade.php)
+    // Menampilkan riwayat booking
     public function index()
     {
+        $userId = Auth::id();
+
         $bookings = Booking::with('paket')
-            ->where('user_id', Auth::id())
+            ->where('user_id', $userId)
             ->latest()
             ->get();
 
-        return view('user.booking.riwayat', compact('bookings'));
+        // Ambil data untuk notifikasi dropdown
+        $notifications = Booking::with('paket')
+            ->where('user_id', $userId)
+            ->latest()
+            ->take(5)
+            ->get();
+
+        return view('user.booking.riwayat', compact('bookings', 'notifications'));
     }
 
     // Menampilkan form untuk membuat booking baru
     public function create()
     {
+        $userId = Auth::id();
         $pakets = Paket::all();
-        return view('user.booking.create', compact('pakets'));
+
+        // Ambil data untuk notifikasi dropdown di halaman form juga
+        $notifications = Booking::with('paket')
+            ->where('user_id', $userId)
+            ->latest()
+            ->take(5)
+            ->get();
+
+        return view('user.booking.create', compact('pakets', 'notifications'));
     }
 
     // Menyimpan data booking baru ke database

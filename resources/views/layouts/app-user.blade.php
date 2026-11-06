@@ -84,6 +84,7 @@
                     <div style="line-height: 1.2;">
                         <span class="d-block fw-bold text-dark text-truncate" style="max-width: 110px; font-size: 13px;">{{ Auth::user()->name ?? 'User Client' }}</span>
                         <small class="text-muted" style="font-size: 11px;">{{ Auth::user()->email ?? 'user@gmail.com' }}</small>
+                        
                     </div>
                 </a>
 
@@ -101,11 +102,53 @@
         <!-- Main Content -->
         <div class="flex-fill overflow-auto" style="height: 100vh;">
             <header class="bg-white border-bottom px-4 py-3 d-flex justify-content-between align-items-center sticky-top">
-                <h5 class="fw-bold mb-0 text-dark">Satria Wedding Organizer</h5>
-                <div class="d-flex align-items-center gap-3">
-                    <a href="{{ url('/') }}" class="btn btn-outline-secondary btn-sm rounded-pill"><i class="bi bi-house me-1"></i> Landing Page</a>
+    <h5 class="fw-bold mb-0 text-dark">Satria Wedding Organizer</h5>
+    <div class="d-flex align-items-center gap-3">
+        
+        <!-- Dropdown Notifikasi -->
+        <div class="dropdown">
+            <button class="btn btn-light position-relative rounded-circle border-0 d-flex align-items-center justify-content-center" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="width: 40px; height: 40px;">
+                <i class="bi bi-bell fs-5 text-secondary"></i>
+                @if(isset($notifications) && $notifications->count() > 0)
+                    <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span>
+                @endif
+            </button>
+            
+            <div class="dropdown-menu dropdown-menu-end p-3 shadow-lg border-0 rounded-4" style="width: 320px; max-height: 400px; overflow-y: auto;">
+                <h6 class="fw-bold mb-3">Notifikasi</h6>
+                <div class="list-group list-group-flush">
+                    @forelse($notifications ?? [] as $notif)
+                        <a href="{{ route('user.booking.index') }}" class="list-group-item list-group-item-action border-0 px-0 py-2 rounded-3 mb-1">
+                            <div class="d-flex align-items-start gap-2">
+                                <!-- Warna ikon  -->
+                                <div class="rounded-circle p-2 d-flex align-items-center justify-content-center text-danger"style="width: 32px; height: 32px; min-width: 32px; background-color: #c84973;" >
+                                    @if($notif->status == 'Selesai' || $notif->status == 'Dikonfirmasi')
+                                        <i class="bi bi-check-lg"></i>
+                                    @elseif($notif->status == 'Ditolak')
+                                        <i class="bi bi-x-lg"></i>
+                                    @endif
+                                </div>
+                                <div>
+                                    <p class="mb-1 small text-dark">
+                                        Status booking Paket <strong>{{ $notif->paket->name ?? 'Wedding' }}</strong> Anda saat ini: <strong>{{ ucfirst($notif->status) }}</strong>.
+                                    </p>
+                                    <span class="text-muted" style="font-size: 10px;">{{ $notif->updated_at->diffForHumans() }}</span>
+                                </div>
+                            </div>
+                        </a>
+                    @empty
+                        <p class="small text-muted text-center mb-0 py-2">Belum ada notifikasi.</p>
+                    @endforelse
                 </div>
-            </header>
+            </div>
+        </div>
+
+        <a href="{{ url('/') }}" class="btn btn-outline-secondary btn-sm rounded-pill">
+            <i class="bi bi-house me-1"></i> Landing Page
+        </a>
+    </div>
+</header>
+     
 
             <main class="p-4">
                 @yield('content')
