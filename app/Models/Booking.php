@@ -5,7 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 
-#[Fillable(['user_id', 'paket_id', 'event_date', 'notes', 'final_price', 'status'])]
+#[Fillable([
+    'user_id',
+    'paket_id',
+    'event_date',
+    'notes',
+    'final_price',
+    'status'
+])]
 class Booking extends Model
 
 {

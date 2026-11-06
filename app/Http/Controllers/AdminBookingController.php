@@ -48,7 +48,7 @@ class AdminBookingController extends Controller
         ]);
 
         return redirect()
-            ->route('admin.booking.index')
+            ->back()
             ->with('success', 'Status booking berhasil diperbarui.');
     }
 
@@ -62,7 +62,7 @@ class AdminBookingController extends Controller
         $booking->update($validated);
 
         return redirect()
-            ->route('admin.booking.index')
-            ->with('success', 'Detail booking berhasil diperbarui.');
+            ->back()
+            ->with('success', 'Status booking berhasil diperbarui.');
     }
 }

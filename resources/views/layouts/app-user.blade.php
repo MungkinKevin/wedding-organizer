@@ -63,13 +63,8 @@
         </a>
     </li>
     <li class="nav-item">
-        <a href="{{ url('/') }}" class="nav-link">
+        <a href="{{ url('/') }}#packages" class="nav-link">
             <i class="bi bi-gem me-2"></i> Lihat Paket Wedding
-        </a>
-    </li>
-    <li class="nav-item">
-        <a href="{{ route('user.booking.create') }}" class="nav-link {{ request()->routeIs('user.booking.create') ? 'active' : '' }}">
-            <i class="bi bi-calendar-plus me-2"></i> Booking Paket
         </a>
     </li>
     <li class="nav-item">

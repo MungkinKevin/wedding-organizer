@@ -5,15 +5,14 @@
         body { font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; }
         .card { background: #ffffff; padding: 20px; border-radius: 8px; max-width: 500px; margin: 0 auto; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         
-        /* Badge Warna Sesuai Status */
-        .badge-pending { color: #856404; background-color: #fff3cd; padding: 5px 10px; border-radius: 4px; font-weight: bold; }
-        .badge-diproses { color: #004085; background-color: #cce5ff; padding: 5px 10px; border-radius: 4px; font-weight: bold; }
-        .badge-dikonfirmasi { color: #155724; background-color: #d4edda; padding: 5px 10px; border-radius: 4px; font-weight: bold; }
-        .badge-selesai { color: #155724; background-color: #d4edda; padding: 5px 10px; border-radius: 4px; font-weight: bold; }
-        .badge-dibatalkan { color: #721c24; background-color: #f8d7da; padding: 5px 10px; border-radius: 4px; font-weight: bold; }
+        /* Badge Warna Sesuai Admin (Subtle style disesuaikan untuk email) */
+        .badge-pending { color: #997404; background-color: #fff3cd; padding: 5px 10px; border-radius: 4px; font-weight: bold; }
+        .badge-diproses { color: #084298; background-color: #cfe2ff; padding: 5px 10px; border-radius: 4px; font-weight: bold; }
+        .badge-dikonfirmasi { color: #0f5132; background-color: #d1e7dd; padding: 5px 10px; border-radius: 4px; font-weight: bold; }
+        .badge-selesai { color: #055160; background-color: #cff4fc; padding: 5px 10px; border-radius: 4px; font-weight: bold; }
+        .badge-dibatalkan { color: #41464b; background-color: #e2e3e5; padding: 5px 10px; border-radius: 4px; font-weight: bold; }
         
-        
-        .btn { display: inline-block; padding: 10px 15px; color: #ffffff; background-color: #bab2b7; text-decoration: none; border-radius: 5px; margin-top: 15px; }
+        .btn { display: inline-block; padding: 10px 15px; color: #ffffff; background-color: #e83e8c; text-decoration: none; border-radius: 5px; margin-top: 15px; }
     </style>
 </head>
 

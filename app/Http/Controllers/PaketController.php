@@ -7,7 +7,9 @@ use App\Models\Paket;
 
 class PaketController extends Controller {
     public function index() {
-        $paket = Paket::latest()->paginate(10);
+        $paket = Paket::orderBy('price', 'asc')
+        ->orderBy('id', 'asc')
+        ->paginate(10);
 
         return view('admin.paket.index', compact('paket'));
     }
