@@ -29,6 +29,7 @@ class BookingController extends Controller
             'paket_id' => $paket->id,
             'event_date' => $request->tanggal_acara,
             'notes' => $request->catatan,
+            'final_price' => $paket->price,
             'status' => 'pending',
         ]);
 

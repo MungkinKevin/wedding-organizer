@@ -36,11 +36,14 @@ class UserBookingController extends Controller
             'notes' => 'nullable|string',
         ]);
 
+        $paket = Paket::findOrFail($request->paket_id);
+
         Booking::create([
             'user_id' => Auth::id(),
             'paket_id' => $request->paket_id,
             'event_date' => $request->event_date,
             'notes' => $request->notes,
+            'final_price' => $paket->price,
             'status' => 'pending',
         ]);
 

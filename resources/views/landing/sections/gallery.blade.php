@@ -29,7 +29,7 @@
                     <div class="w-full h-full relative">
 
                         <img
-                            src="{{ asset('image/' . $galeri->photo) }}"
+                            src="{{ asset('storage/' . $galeri->photo) }}"
                             alt="{{ $galeri->title }}"
                             class="w-full h-full object-cover
                                    transition duration-300
