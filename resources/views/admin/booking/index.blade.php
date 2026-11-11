@@ -77,9 +77,9 @@
                         <thead class="table-light">
                             <tr>
                                 <th class="ps-4">No.</th>
-                                <th>Pelanggan</th>
+                                <th>Calon Pengantin & Kontak</th>
                                 <th>Paket</th>
-                                <th>Tanggal</th>
+                                <th>Jadwal & Lokasi</th>
                                 <th>Status</th>
                                 <th style="min-width: 280px;">Detail Booking</th>
                                 <th>Aksi</th>
@@ -94,14 +94,21 @@
                                     </td>
                                     <td>
                                         <div class="fw-semibold">
-                                            {{ $booking ->user?->email ?? 'Pengguna tidak terdaftar' }}
+                                            {{ $booking->bride_name && $booking->groom_name
+                                                ? $booking->bride_name . ' & ' . $booking->groom_name
+                                                : ($booking->user?->name ?? 'Pengguna tidak terdaftar') }}
                                         </div>
                                         <div class="text-muted small">
                                             {{ $booking->user?->email ?? '-'}}
                                         </div>
                                         <div class="text-muted small">
-                                            {{ $booking->user?->phone ?? '-'}}
+                                            {{ $booking->contact_phone ?? $booking->user?->phone ?? '-' }}
                                         </div>
+                                        @if ($booking->contact_address)
+                                            <div class="text-muted small mt-1">
+                                                Domisili: {{ $booking->contact_address }}
+                                            </div>
+                                        @endif
                                     </td>
 
                                     <td>
@@ -115,8 +122,19 @@
                                         @endif
                                     </td>
 
-                                    <td class="text-nowrap">
-                                        {{ \Carbon\carbon::parse($booking->event_date)->translatedFormat('d M Y') }}
+                                    <td>
+                                        <div class="fw-semibold text-nowrap">
+                                            {{ \Carbon\Carbon::parse($booking->event_date)->translatedFormat('d M Y') }}
+                                            @if ($booking->event_time)
+                                                · {{ \Carbon\Carbon::parse($booking->event_time)->format('H:i') }}
+                                            @endif
+                                        </div>
+                                        @if ($booking->event_location)
+                                            <div class="small fw-semibold mt-1">{{ $booking->event_location }}</div>
+                                        @endif
+                                        @if ($booking->event_address)
+                                            <div class="text-muted small">{{ $booking->event_address }}</div>
+                                        @endif
                                     </td>
 
                                     <td>

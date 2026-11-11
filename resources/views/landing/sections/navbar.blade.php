@@ -1,52 +1,48 @@
 
-<nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3">
+<nav class="sticky top-0 z-50 border-b border-champagne-light/60 bg-white/95 backdrop-blur">
+    <div class="mx-auto max-w-7xl px-4 py-3 sm:px-6">
 
         <div class="flex items-center justify-between">
 
             {{-- Logo --}}
-            <a href="/" class="flex items-center gap-2 sm:gap-3">
-                <img
-                    src="{{ asset('image/logo copy.png') }}"
-                    alt="WO SATRIA"
-                    class="w-12 h-12 sm:w-16 sm:h-16 object-contain"
-                >
-
+            <a href="/" class="flex items-center gap-3">
+                <span class="flex h-11 w-11 items-center justify-center border border-champagne text-lg font-serif text-champagne">
+                    WS
+                </span>
                 <div>
-                    <div class="text-lg sm:text-xl font-bold text-gray-900">
+                    <div class="font-serif text-lg tracking-[0.18em] text-ink sm:text-xl">
                         WO SATRIA
                     </div>
-
-                    <div class="text-xs text-gray-500">
+                    <div class="mt-0.5 text-[9px] uppercase tracking-[0.22em] text-muted sm:text-[10px]">
                         Wedding Organizer
                     </div>
                 </div>
             </a>
 
             {{-- Navigation Desktop --}}
-            <div class="hidden md:flex items-center gap-5 lg:gap-8 text-sm">
+            <div class="hidden items-center gap-5 text-xs uppercase tracking-[0.14em] text-ink md:flex lg:gap-8">
 
-                <a href="/" class="text-gray-700 hover:text-pink-600 transition">
+                <a href="/" class="transition hover:text-champagne">
                     Beranda
                 </a>
 
-                <a href="/#packages" class="text-gray-700 hover:text-pink-600 transition">
+                <a href="/#packages" class="transition hover:text-champagne">
                     Paket
                 </a>
 
-                <a href="/#gallery" class="text-gray-700 hover:text-pink-600 transition">
+                <a href="/#gallery" class="transition hover:text-champagne">
                     Galeri
                 </a>
 
-                <a href="/#testimonials" class="text-gray-700 hover:text-pink-600 transition">
+                <a href="/#testimonials" class="transition hover:text-champagne">
                     Testimoni
                 </a>
 
-                <a href="/#about" class="text-gray-700 hover:text-pink-600 transition">
+                <a href="/#about" class="transition hover:text-champagne">
                     Tentang Kami
                 </a>
 
-                <a href="/#faq" class="text-gray-700 hover:text-pink-600 transition">
+                <a href="/#faq" class="transition hover:text-champagne">
                     FAQ
                 </a>
 
@@ -56,9 +52,11 @@
             <div class="hidden md:block">
 
                 @auth
-                    <a href="{{ route('user.dashboard') }}"
-                       class="flex items-center gap-2 px-5 py-2 border border-gray-400
-                              rounded-md text-sm text-gray-800 hover:bg-gray-100 transition">
+                    <a href="{{ Auth::user()->role === 'admin'
+                        ? route('admin.dashboard')
+                        : route('user.dashboard') }}"
+                       class="flex items-center gap-2 border border-champagne px-5 py-3
+                              text-xs uppercase tracking-[0.14em] text-ink transition hover:bg-cream">
 
                         <svg xmlns="http://www.w3.org/2000/svg"
                              width="18" height="18"
@@ -76,8 +74,8 @@
                     </a>
                 @else
                     <a href="{{ route('login') }}"
-                       class="px-5 py-2 border border-gray-400 rounded-md
-                              text-sm text-gray-800 hover:bg-gray-100 transition">
+                       class="border border-champagne px-5 py-3
+                              text-xs uppercase tracking-[0.14em] text-ink transition hover:bg-cream">
                         Masuk / Daftar
                     </a>
                 @endauth
@@ -88,8 +86,8 @@
             <button
                 type="button"
                 id="mobile-menu-button"
-                class="md:hidden p-2 rounded-md text-gray-700
-                       hover:bg-gray-100 focus:outline-none"
+                class="p-2 rounded-md text-ink md:hidden
+                       hover:bg-cream focus:outline-none"
                 aria-label="Buka menu navigasi"
                 aria-expanded="false"
                 aria-controls="mobile-menu"
@@ -127,44 +125,46 @@
 
         {{-- Navigation Mobile --}}
         <div id="mobile-menu"
-             class="hidden md:hidden border-t border-gray-200 mt-3 pt-3 pb-2">
+             class="mt-3 hidden border-t border-champagne-light pt-3 pb-2 md:hidden">
 
-            <div class="flex flex-col gap-1 text-sm">
+            <div class="flex flex-col gap-1 text-sm text-ink">
 
-                <a href="/" class="px-3 py-3 rounded-md text-gray-700 hover:bg-pink-50 hover:text-pink-600">
+                <a href="/" class="rounded-md px-3 py-3 hover:bg-cream hover:text-champagne">
                     Beranda
                 </a>
 
-                <a href="/#packages" class="px-3 py-3 rounded-md text-gray-700 hover:bg-pink-50 hover:text-pink-600">
+                <a href="/#packages" class="rounded-md px-3 py-3 hover:bg-cream hover:text-champagne">
                     Paket
                 </a>
 
-                <a href="/#gallery" class="px-3 py-3 rounded-md text-gray-700 hover:bg-pink-50 hover:text-pink-600">
+                <a href="/#gallery" class="rounded-md px-3 py-3 hover:bg-cream hover:text-champagne">
                     Galeri
                 </a>
 
-                <a href="/#testimonials" class="px-3 py-3 rounded-md text-gray-700 hover:bg-pink-50 hover:text-pink-600">
+                <a href="/#testimonials" class="rounded-md px-3 py-3 hover:bg-cream hover:text-champagne">
                     Testimoni
                 </a>
 
-                <a href="/#about" class="px-3 py-3 rounded-md text-gray-700 hover:bg-pink-50 hover:text-pink-600">
+                <a href="/#about" class="rounded-md px-3 py-3 hover:bg-cream hover:text-champagne">
                     Tentang Kami
                 </a>
 
-                <a href="/#faq" class="px-3 py-3 rounded-md text-gray-700 hover:bg-pink-50 hover:text-pink-600">
+                <a href="/#faq" class="rounded-md px-3 py-3 hover:bg-cream hover:text-champagne">
                     FAQ
                 </a>
 
-                <div class="border-t border-gray-200 my-2"></div>
+                <div class="my-2 border-t border-champagne-light"></div>
 
                 @auth
-                    <a href="{{ route('user.dashboard') }}"
-                       class="px-3 py-3 rounded-md text-gray-700 hover:bg-pink-50">
+                    <a href="{{ Auth::user()->role === 'admin'
+                        ? route('admin.dashboard')
+                        : route('user.dashboard') }}"
+                       class="rounded-md px-3 py-3 text-ink hover:bg-cream">
                         Profil: {{ Auth::user()->name }}
                     </a>
                 @else
                     <a href="{{ route('login') }}"
-                       class="px-3 py-3 rounded-md text-gray-700 hover:bg-pink-50">
+                       class="rounded-md px-3 py-3 text-ink hover:bg-cream">
                         Masuk / Daftar
                     </a>
                 @endauth

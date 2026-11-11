@@ -1,18 +1,16 @@
-<section id="faq" class="bg-gray-50">
-    <div class="max-w-5xl mx-auto px-6 py-16">
+<section id="faq" class="bg-cream">
+    <div class="mx-auto max-w-5xl px-6 py-16 sm:py-24">
 
         {{-- Judul --}}
-        <div class="text-center mb-10">
-
-            <p class="text-pink-600 font-semibold">
+        <div class="mb-10 max-w-2xl sm:mb-12">
+            <p class="mb-4 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.24em] text-champagne">
+                <span class="h-px w-10 bg-champagne-light"></span>
                 FAQ
             </p>
-
-            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mt-2">
+            <h2 class="font-serif text-3xl text-ink sm:text-4xl">
                 Pertanyaan yang Sering Diajukan
             </h2>
-
-            <p class="text-gray-600 mt-2">
+            <p class="mt-4 leading-7 text-muted">
                 Temukan jawaban dari beberapa pertanyaan umum mengenai layanan kami.
             </p>
 
@@ -20,21 +18,21 @@
 
 
         {{-- FAQ List --}}
-        <div class="space-y-4">
+        <div class="space-y-3">
 
             {{-- FAQ 1 --}}
-            <details class="group bg-white border border-gray-200 rounded-lg">
+            <details class="group border border-champagne-light/70 bg-white">
                 <summary class="flex items-center justify-between
-                                cursor-pointer px-6 py-5
-                                font-semibold text-gray-900
+                                cursor-pointer px-5 py-5
+                                font-medium text-ink sm:px-7
                                 list-none
-                                hover:text-pink-600 transition">
+                                hover:text-champagne transition">
 
                     <span>
                         Apa saja layanan yang disediakan WO SATRIA?
                     </span>
 
-                    <span class="text-pink-600 text-xl
+                    <span class="text-champagne text-xl
                                  transition-transform duration-200
                                  group-open:rotate-45">
                         +
@@ -42,7 +40,7 @@
 
                 </summary>
 
-                <div class="px-6 pb-5 text-gray-600 leading-relaxed">
+                <div class="px-5 pb-6 leading-7 text-muted sm:px-7">
                     WO SATRIA menyediakan berbagai layanan pernikahan,
                     seperti dekorasi, katering, MC, dokumentasi, dan
                     koordinasi acara sesuai dengan paket yang dipilih.
@@ -51,18 +49,18 @@
 
 
             {{-- FAQ 2 --}}
-            <details class="group bg-white border border-gray-200 rounded-lg">
+            <details class="group border border-champagne-light/70 bg-white">
                 <summary class="flex items-center justify-between
-                                cursor-pointer px-6 py-5
-                                font-semibold text-gray-900
+                                cursor-pointer px-5 py-5
+                                font-medium text-ink sm:px-7
                                 list-none
-                                hover:text-pink-600 transition">
+                                hover:text-champagne transition">
 
                     <span>
                         Bagaimana cara melakukan booking?
                     </span>
 
-                    <span class="text-pink-600 text-xl
+                    <span class="text-champagne text-xl
                                  transition-transform duration-200
                                  group-open:rotate-45">
                         +
@@ -70,7 +68,7 @@
 
                 </summary>
 
-                <div class="px-6 pb-5 text-gray-600 leading-relaxed">
+                <div class="px-5 pb-6 leading-7 text-muted sm:px-7">
                     Pilih paket yang sesuai dengan kebutuhan Anda,
                     kemudian lakukan booking melalui halaman pemesanan.
                     Setelah itu, tim WO SATRIA akan menghubungi Anda
@@ -80,18 +78,18 @@
 
 
             {{-- FAQ 3 --}}
-            <details class="group bg-white border border-gray-200 rounded-lg">
+            <details class="group border border-champagne-light/70 bg-white">
                 <summary class="flex items-center justify-between
-                                cursor-pointer px-6 py-5
-                                font-semibold text-gray-900
+                                cursor-pointer px-5 py-5
+                                font-medium text-ink sm:px-7
                                 list-none
-                                hover:text-pink-600 transition">
+                                hover:text-champagne transition">
 
                     <span>
                         Apakah paket dapat disesuaikan?
                     </span>
 
-                    <span class="text-pink-600 text-xl
+                    <span class="text-champagne text-xl
                                  transition-transform duration-200
                                  group-open:rotate-45">
                         +
@@ -99,7 +97,7 @@
 
                 </summary>
 
-                <div class="px-6 pb-5 text-gray-600 leading-relaxed">
+                <div class="px-5 pb-6 leading-7 text-muted sm:px-7">
                     Paket dapat disesuaikan dengan kebutuhan dan
                     kesepakatan antara pelanggan dengan WO SATRIA.
                 </div>
@@ -107,18 +105,18 @@
 
 
             {{-- FAQ 4 --}}
-            <details class="group bg-white border border-gray-200 rounded-lg">
+            <details class="group border border-champagne-light/70 bg-white">
                 <summary class="flex items-center justify-between
-                                cursor-pointer px-6 py-5
-                                font-semibold text-gray-900
+                                cursor-pointer px-5 py-5
+                                font-medium text-ink sm:px-7
                                 list-none
-                                hover:text-pink-600 transition">
+                                hover:text-champagne transition">
 
                     <span>
                         Bagaimana cara menghubungi WO SATRIA?
                     </span>
 
-                    <span class="text-pink-600 text-xl
+                    <span class="text-champagne text-xl
                                  transition-transform duration-200
                                  group-open:rotate-45">
                         +
@@ -126,7 +124,7 @@
 
                 </summary>
 
-                <div class="px-6 pb-5 text-gray-600 leading-relaxed">
+                <div class="px-5 pb-6 leading-7 text-muted sm:px-7">
                     Anda dapat menghubungi WO SATRIA melalui informasi
                     kontak yang tersedia pada bagian Tentang Kami
                     dan Footer.
