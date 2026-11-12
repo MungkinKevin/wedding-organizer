@@ -174,6 +174,12 @@
                         <i class="bi bi-images me-2"></i>
                         <span class="nav-label">Galeri</span>
                     </a>
+                    
+                    <a href="{{ route('admin.laporan.index') }}"
+                    class="nav-link {{ request()->routeIs('admin.laporan.*') ? 'active' : '' }}">
+                        <i class="bi bi-bar-chart-line me-2"></i>
+                        <span class="nav-label">Laporan</span>
+                    </a>
                 </nav>
             </div>
             <div class="pt-3 mt-3 border-top">

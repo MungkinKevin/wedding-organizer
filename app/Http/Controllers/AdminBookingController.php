@@ -26,9 +26,20 @@ class AdminBookingController extends Controller
         ));
     }
 
-    public function updateStatus(Request $request, Booking $booking) {
 
+
+    public function edit(Booking $booking)
+    {
+        $booking->load(['user', 'paket']);
+
+        return view('admin.booking.edit', compact('booking'));
+    }
+
+    // Menyimpan perubahan booking
+    public function update(Request $request, Booking $booking) {
         $validated = $request->validate([
+            'notes' => 'nullable|string',
+            'final_price' => 'nullable|numeric|min:0',
             'status' => [
                 'required',
                 Rule::in([
@@ -41,26 +52,10 @@ class AdminBookingController extends Controller
             ],
         ]);
 
-        $booking->update([
-            'status' => $validated['status'],
-        ]);
-
-        return redirect()
-            ->back()
-            ->with('success', 'Status booking berhasil diperbarui.');
-    }
-
-    public function updateDetails(Request $request, Booking $booking) {
-
-        $validated = $request->validate([
-            'notes' => 'nullable|string',
-            'final_price' => 'nullable|numeric|min:0',
-        ]);
-
         $booking->update($validated);
 
         return redirect()
-            ->back()
-            ->with('success', 'Status booking berhasil diperbarui.');
+            ->route('admin.booking.index')
+            ->with('success', 'Data booking berhasil diperbarui.');
     }
 }

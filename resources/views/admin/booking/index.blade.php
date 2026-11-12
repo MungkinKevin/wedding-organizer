@@ -81,7 +81,8 @@
                                 <th>Paket</th>
                                 <th>Tanggal</th>
                                 <th>Status</th>
-                                <th style="min-width: 280px;">Detail Booking</th>
+                                <th>Catatan Admin</th>
+                                <th>Harga Akhir</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -135,84 +136,26 @@
                                         </span>
                                     </td>
 
-                                    <td class="min-width: 180px;">
-                                        <form action="{{ route('admin.booking.updateDetails', $booking->id) }}" method="POST">
-                                            
-                                            @csrf
-                                            @method('PATCH')
-
-                                            <div class="mb-2">
-                                                <label class="form-label small fw-semibold">
-                                                    Catatan Tambahan
-                                                </label>
-
-                                                <textarea 
-                                                name="notes" 
-                                                rows="3"
-                                                class="form-control form-control-sm"
-                                                placeholder="Contoh: Tambah kursi 50, diskon 5%, request menu..."
-                                                >{{ old('notes', $booking->notes) }}</textarea>
-                                            </div>
-
-                                            <div class="mb-2">
-                                                <label class="form-label small fw-semibold">
-                                                    Harga Akhir (Rp)
-                                                </label>
-
-                                                <input
-                                                    type="number"
-                                                    name="final_price"
-                                                    class="form-control form-control-sm"
-                                                    min="0"
-                                                    step="0.01"
-                                                    value="{{ old('final_price', $booking->final_price) }}"
-                                                    placeholder="Masukkan harga akhir"
-                                                >
-                                            </div>
-
-                                            <button type="submit" class="btn btn-sm btn-success w-100">
-                                                <i class="bi bi-save me-1"></i>    
-                                                Simpan Detail
-                                            </button>
-                                        </form>
-
-                                        <div class="small text-muted mt-2">
-                                            Harga akhir:
-                                            @if ($booking->final_price !== null)
-                                                <strong class="text-success">
-                                                    Rp {{ number_format($booking->final_price, 0, ',', '.') }}
-                                                </strong>
-                                            @else
-                                                Belum ditentukan
-                                            @endif
-                                        </div>
+                                    <td style="min-width: 200px;">
+                                            {{ $booking->notes ?: 'Belum ada catatan' }}
                                     </td>
 
-                                    <td style="min-width: 220px">
-                                        <form action="{{ route('admin.booking.updateStatus', $booking->id )}}" method="POST">
+                                    <td class="text-nowrap">
+                                        @if ($booking->final_price !== null)
+                                            <strong class="text-success">
+                                                Rp {{ number_format($booking->final_price, 0, ',', '.') }}
+                                            </strong>
+                                        @else
+                                            <span class="text-muted">Belum ditentukan</span>
+                                        @endif
+                                    </td>
 
-                                            @csrf
-                                            @method('PATCH')
-
-                                            <select name="status" id="form-select form-select-sm mb-2" required>
-                                                @foreach ([
-                                                    'pending' => 'Pending',
-                                                    'diproses' => 'Diproses',
-                                                    'dikonfirmasi' => 'Dikonfirmasi',
-                                                    'selesai' => 'Selesai',
-                                                    'dibatalkan' => 'Dibatalkan',
-                                                ] as $value => $label)
-                                                    <option value="{{ $value }}" @selected($booking->status === $value)>
-                                                        {{ $label }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-
-                                            <button type="submit" class="btn btn-sm btn-primary w-100">
-                                                <i class="bi bi-save-me-1"></i>
-                                                Simpan status
-                                            </button>
-                                        </form>
+                                    <td>
+                                        <a href="{{ route('admin.booking.edit', $booking->id) }}"
+                                        class="btn btn-sm btn-primary text-nowrap">
+                                            <i class="bi bi-pencil-square me-1"></i>
+                                            Edit Booking
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach

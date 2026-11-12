@@ -9,6 +9,7 @@ use App\Http\Controllers\PaketController;
 use App\Http\Controllers\AdminBookingController;
 use App\Http\Controllers\AdminTestimoniController;
 use App\Http\Controllers\AdminGaleriController;
+use App\Http\Controllers\AdminLaporanController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\UserProfileController;
@@ -47,15 +48,15 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/booking', [AdminBookingController::class, 'index'])
         ->name('admin.booking.index');
 
-    Route::patch('/admin/booking/{booking}/status', [
-        AdminBookingController::class,
-        'updateStatus'
-    ])->name('admin.booking.updateStatus');
+    Route::get('/admin/booking/{booking}/edit', [
+    AdminBookingController::class,
+    'edit'
+    ])->name('admin.booking.edit');
 
-    Route::patch('/admin/booking/{booking}/details', [
+    Route::patch('/admin/booking/{booking}', [
         AdminBookingController::class,
-        'updateDetails'
-    ])->name('admin.booking.updateDetails');
+        'update'
+    ])->name('admin.booking.update');
 
     Route::resource('admin/testimoni', AdminTestimoniController::class)
         ->except(['show'])
@@ -64,6 +65,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('admin/galeri', AdminGaleriController::class)
         ->except(['show'])
         ->names('admin.galeri');
+
+    Route::get('/admin/laporan', [AdminLaporanController::class, 'index'])
+    ->name('admin.laporan.index');
 });
 
 // ========================

@@ -19,6 +19,11 @@ class AdminController extends Controller
 
         $totalTestimoni = Testimoni::count();
 
+        $totalBookingSelesai = Booking::where('status', 'selesai')->count();
+
+        $totalPendapatan = Booking::where('status', 'selesai')
+            ->sum('final_price');
+
         $bookingsAktif = Booking::with(['user', 'paket'])
             ->whereIn('status', ['pending', 'diproses', 'dikonfirmasi'])
             ->latest()
@@ -30,7 +35,9 @@ class AdminController extends Controller
             'totalBooking',
             'totalPendingBooking',
             'totalTestimoni',
-            'bookingsAktif'
+            'bookingsAktif',
+            'totalBookingSelesai',
+            'totalPendapatan'
         ));
     }
 }
