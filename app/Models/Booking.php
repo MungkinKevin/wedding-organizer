@@ -9,6 +9,13 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
     'user_id',
     'paket_id',
     'event_date',
+    'event_time',
+    'bride_name',
+    'groom_name',
+    'contact_phone',
+    'contact_address',
+    'event_location',
+    'event_address',
     'notes',
     'final_price',
     'status'

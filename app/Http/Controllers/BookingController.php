@@ -17,9 +17,16 @@ class BookingController extends Controller
 
     public function store(Request $request, $id)
     {
-        $request->validate([
+        $validated = $request->validate([
+            'bride_name' => 'required|string|max:100',
+            'groom_name' => 'required|string|max:100',
+            'contact_phone' => ['required', 'string', 'max:20', 'regex:/^[0-9+()\s-]{8,20}$/'],
+            'contact_address' => 'required|string|max:1000',
             'tanggal_acara' => 'required|date|after_or_equal:today',
-            'catatan' => 'nullable|string',
+            'waktu_acara' => 'required|date_format:H:i',
+            'event_location' => 'nullable|string|max:150',
+            'event_address' => 'required|string|max:1000',
+            'catatan' => 'nullable|string|max:3000',
         ]);
 
         $paket = Paket::findOrFail($id);
@@ -27,8 +34,15 @@ class BookingController extends Controller
         Booking::create([
             'user_id' => auth()->id(),
             'paket_id' => $paket->id,
-            'event_date' => $request->tanggal_acara,
-            'notes' => $request->catatan,
+            'bride_name' => $validated['bride_name'],
+            'groom_name' => $validated['groom_name'],
+            'contact_phone' => $validated['contact_phone'],
+            'contact_address' => $validated['contact_address'],
+            'event_date' => $validated['tanggal_acara'],
+            'event_time' => $validated['waktu_acara'],
+            'event_location' => $validated['event_location'] ?? null,
+            'event_address' => $validated['event_address'],
+            'notes' => $validated['catatan'] ?? null,
             'final_price' => $paket->price,
             'status' => 'pending',
         ]);

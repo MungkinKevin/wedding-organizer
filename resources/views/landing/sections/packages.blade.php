@@ -1,24 +1,21 @@
 
-<section id="packages" class="bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
-
-        {{-- Judul --}}
-        <div class="text-center mb-10">
-            <p class="text-pink-600 font-semibold">
-                Pilihan Paket
+<section id="packages" class="bg-[#f5f0ea]">
+    <div class="mx-auto max-w-7xl px-6 py-16 sm:py-24">
+        <div class="mb-12 max-w-2xl sm:mb-14">
+            <p class="mb-4 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.24em] text-rose">
+                <span class="h-px w-10 bg-rose/50"></span>
+                Layanan & Paket
             </p>
-
-            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mt-2">
-                Paket Pernikahan
+            <h2 class="font-serif text-3xl leading-tight text-wine sm:text-4xl lg:text-5xl">
+                Pilih pendampingan yang terasa pas untuk cerita Anda.
             </h2>
-
-            <p class="text-gray-600 mt-2 max-w-2xl mx-auto">
-                Pilih paket yang sesuai dengan kebutuhan dan anggaran pernikahan Anda.
+            <p class="mt-4 max-w-xl leading-7 text-muted">
+                Setiap pasangan punya cerita dan titik mulai yang berbeda. Pilih pendampingan yang paling sesuai untuk hari istimewa Anda.
             </p>
         </div>
 
         {{-- Kartu Paket dari Database --}}
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+        <div class="grid grid-cols-1 items-stretch gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
 
             @forelse ($pakets as $paket)
 
@@ -30,58 +27,58 @@
                     $isPopular = $paket->name === 'Gold';
                 @endphp
 
-                <div class="relative min-w-0 border rounded-lg p-5 sm:p-6
-                    transition duration-200
-
+                <div class="relative flex min-w-0 flex-col border p-6 transition duration-300 hover:-translate-y-1 sm:p-8
                     {{ $isPopular
-                        ? 'border-amber-400 bg-amber-50 shadow-xl lg:-translate-y-3'
-                        : 'border-gray-200 bg-white hover:border-pink-500 hover:bg-pink-50 hover:shadow-lg'
+                        ? 'border-wine bg-wine text-white shadow-[0_20px_55px_rgba(72,39,55,0.22)] lg:-translate-y-3'
+                        : 'border-champagne-light/80 bg-white text-ink hover:border-champagne'
                     }}">
 
                     {{-- Badge Paket Populer --}}
                     @if ($isPopular)
-                        <div class="absolute -top-4 left-1/2 -translate-x-1/2">
-                            <span class="inline-block bg-amber-500 text-white
-                                text-xs font-bold px-5 py-2 rounded-full shadow-md
-                                whitespace-nowrap">
-                                ★ PALING POPULER
+                        <div class="absolute -top-3 left-6">
+                            <span class="inline-block bg-blush px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-wine">
+                                ✦ Pilihan favorit
                             </span>
                         </div>
                     @endif
 
                     {{-- Nama Paket --}}
-                    <h3 class="text-xl font-bold text-gray-900
-                        {{ $isPopular ? 'mt-3' : '' }}">
+                    <p class="mb-3 text-[9px] font-semibold uppercase tracking-[0.22em] {{ $isPopular ? 'text-blush' : 'text-champagne' }}">
+                        Pilihan paket
+                    </p>
+                    <h3 class="font-serif text-3xl {{ $isPopular ? 'mt-4 text-white' : 'text-wine' }}">
                         {{ $paket->name }}
                     </h3>
 
                     {{-- Deskripsi --}}
-                    <p class="text-gray-500 mt-2 break-words">
+                    <p class="mt-3 min-h-14 break-words text-sm leading-6 {{ $isPopular ? 'text-white/70' : 'text-muted' }}">
                         {{ $paket->description }}
                     </p>
 
                     {{-- Harga --}}
-                    <div class="mt-6">
-                        <span class="text-xl sm:text-2xl font-bold text-gray-900 break-words">
+                    <div class="mt-7">
+                        <p class="mb-2 text-[10px] uppercase tracking-[0.2em] {{ $isPopular ? 'text-white/55' : 'text-muted' }}">Investasi</p>
+                        <span class="break-words font-serif text-2xl sm:text-3xl {{ $isPopular ? 'text-blush' : 'text-champagne' }}">
                             Rp{{ number_format($paket->price, 0, ',', '.') }}
                         </span>
                     </div>
 
-                    <div class="border-t border-gray-200 my-6"></div>
+                    <div class="my-6 border-t {{ $isPopular ? 'border-white/20' : 'border-champagne-light/70' }}"></div>
 
                     {{-- Fasilitas --}}
-                    <p class="font-semibold text-gray-900 mb-3">
+                    <p class="mb-4 text-xs font-semibold uppercase tracking-[0.12em] {{ $isPopular ? 'text-white' : 'text-ink' }}">
                         Yang Anda Dapatkan:
                     </p>
 
-                    <ul class="space-y-3 text-sm text-gray-600">
+                    <ul class="flex-1 space-y-3 text-sm leading-6 {{ $isPopular ? 'text-white/75' : 'text-muted' }}">
 
                         @forelse ($fasilitas as $item)
-                            <li class="break-words">
-                                ✓ {{ $item }}
+                            <li class="flex gap-3 break-words">
+                                <span class="{{ $isPopular ? 'text-blush' : 'text-champagne' }}" aria-hidden="true">✦</span>
+                                <span>{{ $item }}</span>
                             </li>
                         @empty
-                            <li>Belum ada fasilitas yang ditambahkan.</li>
+                            <li class="{{ $isPopular ? 'text-white/60' : 'text-muted' }}">Belum ada fasilitas yang ditambahkan.</li>
                         @endforelse
 
                     </ul>
@@ -96,12 +93,11 @@
                             @js(array_values($fasilitas)),
                             @js(route('booking.create', $paket->id))
                         )"
-                        class="w-full mt-6 px-5 py-3 border rounded-md
-                            font-semibold transition
+                        class="mt-8 w-full border px-5 py-4 text-xs font-semibold uppercase tracking-[0.16em] transition
 
                             {{ $isPopular
-                                ? 'border-amber-500 bg-amber-500 text-white hover:bg-amber-600'
-                                : 'border-gray-400 text-gray-800 hover:bg-gray-100'
+                                ? 'border-blush bg-blush text-wine hover:border-white hover:bg-white'
+                                : 'border-champagne text-ink hover:bg-pale-rose'
                             }}">
 
                         Lihat Detail
@@ -124,56 +120,54 @@
 
         {{-- Detail Paket --}}
         <div id="package-detail"
-            class="hidden mt-10 border border-gray-200 rounded-lg bg-gray-50 p-5 sm:p-8">
+            class="mt-10 hidden border border-champagne-light bg-white p-5 sm:p-8">
 
             <div class="flex items-center justify-between gap-4 mb-6">
 
                 <h3 id="detail-title"
-                    class="text-xl sm:text-2xl font-bold text-gray-900">
+                    class="font-serif text-xl text-ink sm:text-2xl">
                 </h3>
 
                 <button type="button"
                     onclick="closePackage()"
                     aria-label="Tutup detail paket"
-                    class="text-gray-500 hover:text-gray-900 text-xl shrink-0">
+                    class="shrink-0 text-xl text-muted hover:text-ink">
                     ✕
                 </button>
 
             </div>
 
             <p id="detail-description"
-                class="text-gray-600 mb-6 break-words">
+                class="mb-6 break-words text-muted">
             </p>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
                 <div>
 
-                    <h4 class="font-semibold text-gray-900 mb-3">
+                    <h4                     class="mb-3 font-semibold text-ink">
                         Detail Layanan
                     </h4>
 
                     <ul id="detail-services"
-                        class="space-y-2 text-gray-600">
+                        class="space-y-2 text-muted">
                     </ul>
 
                 </div>
 
                 <div>
 
-                    <h4 class="font-semibold text-gray-900 mb-3">
+                    <h4                     class="mb-3 font-semibold text-ink">
                         Harga Paket
                     </h4>
 
                     <p id="detail-price"
-                        class="text-xl sm:text-2xl font-bold text-pink-600 break-words">
+                        class="break-words font-serif text-xl text-champagne sm:text-2xl">
                     </p>
 
                     <a id="booking-button"
                         href="#"
-                        class="block sm:inline-block text-center mt-6 px-6 py-3
-                            bg-pink-600 text-white rounded-md font-semibold
-                            hover:bg-pink-700 transition">
+                        class="mt-6 block bg-champagne px-6 py-3 text-center font-semibold text-white transition hover:bg-[#967554] sm:inline-block">
                         Booking Sekarang
                     </a>
 
