@@ -10,13 +10,22 @@ class UserDashboardController extends Controller
 {
     public function index()
     {
-        // Mengambil data booking milik user yang sedang login beserta data paketnya
+        $userId = Auth::id();
+
+        // 1. Mengambil data booking utama untuk halaman dashboard
         $bookings = Booking::with('paket')
-            ->where('user_id', Auth::id())
+            ->where('user_id', $userId)
             ->latest()
             ->get();
 
-        // Mengirim data bookings ke view user.dashboard
-        return view('user.dashboard', compact('bookings'));
+        // 2. Mengambil data untuk notifikasi dropdown (5 data terbaru)
+        $notifications = Booking::with('paket')
+            ->where('user_id', $userId)
+            ->latest()
+            ->take(5)
+            ->get();
+
+        // 3. Kirim $bookings DAN $notifications sekaligus ke view
+        return view('user.dashboard', compact('bookings', 'notifications'));
     }
 }

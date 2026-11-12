@@ -29,7 +29,7 @@ class AdminController extends Controller
             ->latest()
             ->take(10)
             ->get();
-        
+
         return view('admin.dashboard', compact(
             'totalPaket',
             'totalBooking',

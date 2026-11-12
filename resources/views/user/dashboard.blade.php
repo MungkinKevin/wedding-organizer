@@ -4,14 +4,11 @@
 
 @section('content')
     <div class="card border-0 text-white mb-4 rounded-4 shadow-sm" style="background: linear-gradient(135deg, #981172, #1e293b);">
-        <div class="card-body p-4 d-flex justify-content-between align-items-center">
+        <div class="card-body p-4">
             <div>
                 <h4 class="fw-bold mb-1">Selamat Datang, Pengantin Bahagia! 👋</h4>
                 <p class="mb-0 text-white-50 small">Kelola rencana pernikahan impian Anda bersama WO SATRIA di sini.</p>
             </div>
-            <a href="#" class="btn btn-light font-semibold text-danger border-0 px-4 rounded-3 shadow-sm" style="color: #e83e8c !important;">
-                <i class="bi bi-search me-1"></i> Cari Paket
-            </a>
         </div>
     </div>
 
@@ -30,9 +27,9 @@
                     <table class="table table-hover align-middle">
                         <thead class="table-light">
                             <tr>
-                                <th>#</th>
-                                <th>Nama Paket</th>
+                                <th>Paket Wedding</th>
                                 <th>Tanggal Acara</th>
+                                <th>Catatan</th>
                                 <th>Total Harga</th>
                                 <th>Status</th>
                             </tr>
@@ -40,20 +37,29 @@
                         <tbody>
                             @foreach($bookings as $index => $item)
                                 <tr>
-                                    <td>{{ $index + 1 }}</td>
                                     <td class="fw-bold">{{ $item->paket->name ?? 'Paket Tidak Ditemukan' }}</td>
                                     <td>{{ \Carbon\Carbon::parse($item->event_date)->format('d M Y') }}</td>
-                                    <td>Rp {{ number_format($item->paket->price ?? 0, 0, ',', '.') }}</td>
+                                    <td>{{ $item->notes ?? '-' }}</td>
                                     <td>
-                                        @if($item->status == 'pending')
-                                            <span class="badge bg-warning text-dark">Menunggu Konfirmasi</span>
-                                        @elseif($item->status == 'approved' || $item->status == 'diterima')
-                                            <span class="badge bg-success">Disetujui</span>
-                                        @elseif($item->status == 'rejected' || $item->status == 'ditolak')
-                                            <span class="badge bg-danger">Ditolak</span>
+                                        @if($item->final_price !== null)
+                                            Rp {{ number_format($item->final_price, 0, ',', '.') }}
                                         @else
-                                            <span class="badge bg-secondary">{{ ucfirst($item->status) }}</span>
+                                            Rp {{ number_format($item->paket->price ?? 0, 0, ',', '.') }}
                                         @endif
+                                    </td>
+                                    <td>
+                                        @php
+                                            $statusClass = [
+                                                'pending' => 'bg-warning-subtle text-warning-emphasis',
+                                                'diproses' => 'bg-info-subtle text-info-emphasis',
+                                                'dikonfirmasi' => 'bg-success-subtle text-success-emphasis',
+                                                'selesai' => 'bg-primary-subtle text-primary-emphasis',
+                                                'dibatalkan' => 'bg-secondary-subtle text-secondary-emphasis',
+                                            ][$item->status] ?? 'bg-secondary-subtle text-secondary-emphasis';
+                                        @endphp
+                                        <span class="badge {{ $statusClass }}">
+                                            {{ ucfirst($item->status) }}
+                                        </span>
                                     </td>
                                 </tr>
                             @endforeach
