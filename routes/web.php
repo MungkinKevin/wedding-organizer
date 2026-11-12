@@ -58,6 +58,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         'update'
     ])->name('admin.booking.update');
 
+    Route::patch('/admin/booking/{booking}/details', [
+    AdminBookingController::class,
+    'updateDetails'
+    ])->name('admin.booking.updateDetails');
+
     Route::resource('admin/testimoni', AdminTestimoniController::class)
         ->except(['show'])
         ->names('admin.testimoni');
@@ -113,11 +118,11 @@ Route::middleware(['auth'])->prefix('user')->name('user.')->group(function () {
 // ========================
 // BOOKING DARI LANDING PAGE
 // ========================
+// BOOKING FROM LANDING PAGE
 Route::middleware(['auth'])->group(function () {
-
     Route::get('/booking/{id}', [BookingController::class, 'create'])
-        ->name('booking.create');
+        ->name('landing.booking.create');
 
     Route::post('/booking/{id}', [BookingController::class, 'store'])
-        ->name('booking.store');
+        ->name('landing.booking.store');
 });
