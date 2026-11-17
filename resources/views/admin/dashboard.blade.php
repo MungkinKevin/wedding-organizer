@@ -212,7 +212,9 @@
                                     <tr>
                                         <td class="ps-3">
                                             <div class="fw-semibold">
-                                                {{ $booking->user->name ?? 'User tidak ditemukan' }}
+                                                {{ $booking->bride_name && $booking->groom_name
+                                                    ? $booking->bride_name . ' & ' . $booking->groom_name
+                                                    : ($booking->user?->name ?? 'User tidak ditemukan') }}
                                             </div>
                                             <small class="text-muted">
                                                 Booking #{{ $booking->id }}

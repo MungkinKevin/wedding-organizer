@@ -63,7 +63,7 @@
                                     <td style="min-width: 220px;">
                                         @php
                                             $facilities = array_filter(
-                                                array_map('trim', explode(',', $item->facilities ?? ''))
+                                                array_map('trim', explode(';', $item->facilities ?? ''))
                                             );
                                         @endphp
 
