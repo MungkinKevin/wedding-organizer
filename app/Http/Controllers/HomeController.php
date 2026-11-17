@@ -2,27 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Paket;
+use App\Models\Testimoni;
+use App\Models\Galeri;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
-        return view('home');
+        // Mengambil data paket berdasarkan harga termurah
+        $pakets = Paket::orderBy('price', 'asc')->get();
+
+        // Mengambil seluruh data testimoni
+        $testimonis = Testimoni::all();
+
+        // Mengambil seluruh data galeri
+        $galeris = Galeri::all();
+
+        return view('landing.index', compact(
+            'pakets',
+            'testimonis',
+            'galeris'
+        ));
     }
 }
