@@ -171,8 +171,8 @@
 
                         @foreach ([
                             'pending' => 'Pending',
-                            'diproses' => 'Diproses',
                             'dikonfirmasi' => 'Dikonfirmasi',
+                            'diproses' => 'Diproses',
                             'selesai' => 'Selesai',
                             'dibatalkan' => 'Dibatalkan',
                         ] as $value => $label)

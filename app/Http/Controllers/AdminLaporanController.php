@@ -33,7 +33,7 @@ class AdminLaporanController extends Controller
             ->sum('final_price');
 
         // Daftar booking untuk ditampilkan pada tabel
-        $bookings = $query->latest('event_date')
+        $bookings = $query->orderBy('event_date', 'asc')
             ->paginate(10)
             ->withQueryString();
 

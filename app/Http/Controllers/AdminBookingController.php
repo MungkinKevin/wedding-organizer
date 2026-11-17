@@ -14,14 +14,15 @@ class AdminBookingController extends Controller
         
         $bookings = Booking::with(['user', 'paket'])
             ->orderByRaw("
-            CASE status
+            CASE LOWER(TRIM(status))
                 WHEN 'pending' THEN 1
                 WHEN 'dikonfirmasi' THEN 2
                 WHEN 'diproses' THEN 3
                 WHEN 'selesai' THEN 4
                 WHEN 'dibatalkan' THEN 5
                 ELSE 6
-            END")
+            END ASC")
+            ->orderBy('event_date', 'asc')
             ->orderByDesc('created_at')
             ->paginate(10)
             ->withQueryString();

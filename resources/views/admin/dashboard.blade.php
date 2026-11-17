@@ -130,7 +130,7 @@
 
                     <div class="text-muted small">Booking Menunggu</div>
                     <h3 class="fw-bold mb-0">{{ $totalPendingBooking }}</h3>
-                    <small class="text-muted">Menunggu konfirmasi</small>
+                    <small class="text-muted">Antrian Booking yang belum selesai</small>
                 </div>
             </div>
 
