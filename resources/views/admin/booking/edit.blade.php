@@ -38,16 +38,7 @@
             {{-- Informasi pelanggan dan paket --}}
             <div class="row g-3 mb-4">
 
-                <div class="col-md-6">
-                    <label class="form-label fw-semibold">
-                        Nama Pelanggan
-                    </label>
-                    <input type="text"
-                           class="form-control"
-                           value="{{ $booking->user?->name ?? '-' }}"
-                           readonly>
-                </div>
-
+                
                 <div class="col-md-6">
                     <label class="form-label fw-semibold">
                         Email Pelanggan
@@ -111,6 +102,36 @@
 
                 <h5 class="fw-bold mb-3">Edit Detail Booking</h5>
 
+                {{-- Nama calon pengantin --}}
+                <div class="row g-3 mb-3">
+
+                    <div class="col-md-6">
+                        <label for="bride_name" class="form-label fw-semibold">
+                            Nama Calon Pengantin Wanita
+                        </label>
+
+                        <input type="text"
+                            name="bride_name"
+                            id="bride_name"
+                            class="form-control"
+                            value="{{ old('bride_name', $booking->bride_name) }}"
+                            placeholder="Masukkan nama calon pengantin wanita">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="groom_name" class="form-label fw-semibold">
+                            Nama Calon Pengantin Pria
+                        </label>
+
+                        <input type="text"
+                            name="groom_name"
+                            id="groom_name"
+                            class="form-control"
+                            value="{{ old('groom_name', $booking->groom_name) }}"
+                            placeholder="Masukkan nama calon pengantin pria">
+                    </div>
+
+                </div>
                 <div class="mb-3">
                     <label for="notes" class="form-label fw-semibold">
                         Catatan Tambahan

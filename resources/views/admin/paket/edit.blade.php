@@ -77,7 +77,7 @@
 
                 <h5 class="fw-bold mb-1">Fasilitas Paket</h5>
                 <p class="text-muted small mb-3">
-                    Perbarui fasilitas paket. Pisahkan setiap fasilitas menggunakan koma (,).
+                    Perbarui fasilitas paket. Pisahkan setiap fasilitas menggunakan titik koma (;).
                 </p>
 
                 <div class="mb-3">
@@ -90,11 +90,11 @@
                         name="facilities"
                         rows="4"
                         class="form-control @error('facilities') is-invalid @enderror"
-                        placeholder="Contoh: Dekorasi pelaminan, Katering, Dokumentasi, MC"
+                        placeholder="Contoh: Dekorasi pelaminan; Katering; Dokumentasi; MC"
                     >{{ old('facilities', $paket->facilities) }}</textarea>
 
                     <div class="form-text">
-                        Pisahkan setiap fasilitas menggunakan tanda koma (,).
+                        Pisahkan setiap fasilitas menggunakan titik koma (;).
                     </div>
 
                     @error('facilities')

@@ -79,7 +79,7 @@
 
                 <h5 class="fw-bold mb-1">Fasilitas Paket</h5>
                 <p class="text-muted small mb-3">
-                    Masukkan fasilitas paket dan pisahkan setiap fasilitas menggunakan koma (,).
+                    Masukkan fasilitas paket dan pisahkan setiap fasilitas menggunakan titik koma (;).
                 </p>
 
                 <div class="mb-3">
@@ -87,16 +87,16 @@
                         Daftar Fasilitas
                     </label>
 
-                    <textarea 
-                            name="facilities" 
-                            id="facilities"
-                            rows="4"
-                            class="form-control @error('facilities') is-invalid @enderror"
-                            placeholder="Contoh : Dekorasi pelaminan, Katering, Dokumentasi, MC"
-                    >{{ old('facilities')}}</textarea>
+                    <textarea
+                        name="facilities"
+                        id="facilities"
+                        rows="4"
+                        class="form-control @error('facilities') is-invalid @enderror"
+                        placeholder="Contoh: Dekorasi pelaminan; Katering; Dokumentasi; MC"
+                    >{{ old('facilities') }}</textarea>
 
                     <div class="form-text">
-                        Pisahkan setiap fasilitas menggunakan koma (,).
+                        Pisahkan setiap fasilitas menggunakan titik koma (;).
                     </div>
 
                     @error('facilities')

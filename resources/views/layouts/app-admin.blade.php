@@ -129,6 +129,24 @@
                 font-size: 20px;
             }
         }
+
+        /*Memperbaiki ukuran ikon pagination Laravel */
+        .pagination svg {
+            width: 16px !important;
+            height: 16px !important;
+        }
+
+        .pagination {
+            margin-bottom: 0;
+            flex-wrap: wrap;
+            gap: 3px;
+        }
+
+        .pagination .page-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     </style>
 
     @stack('styles')

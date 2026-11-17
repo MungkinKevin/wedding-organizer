@@ -182,7 +182,7 @@
                 </div>
 
                 <div class="p-3">
-                    {{ $bookings->links() }}
+                    {{ $bookings->links('pagination::bootstrap-5') }}
                 </div>
             @endif
         </div>

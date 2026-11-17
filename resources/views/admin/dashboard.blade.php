@@ -11,7 +11,9 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h3 class="fw-bold mb-1">Dashboard Admin</h3>
-            <p class="text-muted mb-0">Selamat datang di halaman dashboard Wedding Organizer.</p>
+            <p class="text-muted mb-0">
+                Selamat datang di halaman dashboard Wedding Organizer.
+            </p>
         </div>
     </div>
 
@@ -137,8 +139,8 @@
 
                     <thead class="table-light">
                         <tr>
-                            <th style="width: 5%">No</th>
-                            <th>Nama User</th>
+                            <th>No</th>
+                            <th>Nama Pengantin / User</th>
                             <th>Paket</th>
                             <th>Status</th>
                             <th>Catatan</th>
@@ -154,15 +156,25 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
 
+                                {{-- Nama Pengantin --}}
                                 <td>
-                                    {{ $booking->user->name ?? '-' }}
+                                    <div class="fw-semibold">
+                                        {{ $booking->bride_name && $booking->groom_name
+                                            ? $booking->bride_name . ' & ' . $booking->groom_name
+                                            : ($booking->user?->name ?? 'User tidak ditemukan') }}
+                                    </div>
+
+                                    <small class="text-muted">
+                                        Booking #{{ $booking->id }}
+                                    </small>
                                 </td>
 
+                                {{-- Nama Paket --}}
                                 <td>
                                     {{ $booking->paket->nama_paket ?? '-' }}
                                 </td>
 
-                                {{-- Kolom Status --}}
+                                {{-- Status --}}
                                 <td>
                                     <span class="badge
                                         @if ($booking->status == 'pending')
@@ -182,21 +194,29 @@
                                     </span>
                                 </td>
 
-                                {{-- Kolom Catatan --}}
-                                <td>
-                                    {{ $booking->notes ?? '-' }}
+                                {{-- Catatan --}}
+                                <td style="min-width: 180px;">
+                                    {{ $booking->notes ?: 'Belum ada catatan' }}
                                 </td>
 
-                                {{-- Kolom Harga --}}
-                                <td>
-                                    Rp {{ number_format($booking->final_price ?? 0, 0, ',', '.') }}
+                                {{-- Harga Final --}}
+                                <td class="text-nowrap">
+                                    @if ($booking->final_price !== null)
+                                        <strong class="text-success">
+                                            Rp {{ number_format($booking->final_price, 0, ',', '.') }}
+                                        </strong>
+                                    @else
+                                        <span class="text-muted">
+                                            Belum ditentukan
+                                        </span>
+                                    @endif
                                 </td>
 
-                                {{-- Kolom Aksi --}}
-                                <td>
+                                {{-- Aksi --}}
+                                <td class="text-center">
                                     <a href="{{ route('admin.booking.edit', $booking->id) }}"
-                                       class="btn btn-sm btn-primary">
-                                        <i class="bi bi-pencil-square"></i>
+                                       class="btn btn-sm btn-primary text-nowrap">
+                                        <i class="bi bi-pencil-square me-1"></i>
                                         Edit Booking
                                     </a>
                                 </td>
@@ -220,7 +240,6 @@
             </div>
 
         </div>
-
     </div>
 
 </div>
