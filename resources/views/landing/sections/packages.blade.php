@@ -21,7 +21,7 @@
 
                 @php
                     $fasilitas = array_filter(
-                        array_map('trim', explode(',', $paket->facilities ?? ''))
+                        array_map('trim', explode(';', $paket->facilities ?? ''))
                     );
 
                     $isPopular = $paket->name === 'Gold';
