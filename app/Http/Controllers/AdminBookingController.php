@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Booking;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Mail;          
+use App\Mail\BookingStatusNotification;
 
 class AdminBookingController extends Controller
 {
@@ -65,6 +67,18 @@ class AdminBookingController extends Controller
         ]);
 
         $booking->update($validated);
+    
+           // Kirim email notifikasi ke user yang bersangkutan
+        try {
+            if ($booking->user && $booking->user->email) {
+                Mail::to($booking->user->email)->send(new BookingStatusNotification($booking));
+                \Log::info('Email berhasil dikirim ke: ' . $booking->user->email);
+            } else {
+                \Log::warning('Email gagal dikirim karena user atau email booking ID ' . $booking->id . ' kosong.');
+            }
+        } catch (\Exception $e) {
+            \Log::error('Gagal mengirim email status booking: ' . $e->getMessage());
+        }
 
         return redirect()
             ->route('admin.booking.index')

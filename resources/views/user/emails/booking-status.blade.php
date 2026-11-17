@@ -5,7 +5,7 @@
         body { font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; }
         .card { background: #ffffff; padding: 20px; border-radius: 8px; max-width: 500px; margin: 0 auto; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         
-        /* Badge Warna Sesuai Admin (Subtle style disesuaikan untuk email) */
+        /*  Warna  */
         .badge-pending { color: #997404; background-color: #fff3cd; padding: 5px 10px; border-radius: 4px; font-weight: bold; }
         .badge-diproses { color: #084298; background-color: #cfe2ff; padding: 5px 10px; border-radius: 4px; font-weight: bold; }
         .badge-dikonfirmasi { color: #0f5132; background-color: #d1e7dd; padding: 5px 10px; border-radius: 4px; font-weight: bold; }
