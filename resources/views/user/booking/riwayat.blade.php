@@ -4,8 +4,8 @@
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h3 class="fw-bold">Riwayat Booking</h3>
-       <a href="{{ route('user.booking.create') }}" class="btn text-white fw-semibold" style="background-color: #e83e8c;">
-         + Buat Booking Baru
+        <a href="{{ route('landing') }}#packages" class="btn text-white fw-semibold" style="background-color: #e83e8c;">
+            + Buat Booking Baru
         </a>
     </div>
 
@@ -26,6 +26,7 @@
                             <th>Paket Wedding</th>
                             <th>Tanggal Acara</th>
                             <th>Catatan</th>
+                            <th>Total Harga</th>
                             <th>Status</th>
                         </tr>
                     </thead>
@@ -37,22 +38,30 @@
                                 <td>{{ \Carbon\Carbon::parse($item->event_date)->format('d M Y') }}</td>
                                 <td>{{ $item->notes ?? '-' }}</td>
                                 <td>
-                                    @if($item->status == 'pending')
-                                        <span class="badge bg-warning text-dark">Pending</span>
-                                    @elseif($item->status == 'diproses')
-                                        <span class="badge bg-info text-dark">Diproses</span>
-                                    @elseif($item->status == 'dikonfirmasi')
-                                        <span class="badge bg-success">Dikonfirmasi</span>
-                                    @elseif($item->status == 'selesai')
-                                        <span class="badge bg-primary">Selesai</span>
+                                    @if($item->final_price !== null)
+                                        Rp {{ number_format($item->final_price, 0, ',', '.') }}
                                     @else
-                                        <span class="badge bg-danger">Dibatalkan</span>
+                                        Rp {{ number_format($item->paket->price ?? 0, 0, ',', '.') }}
                                     @endif
+                                </td>
+                                <td>
+                                    @php
+                                        $statusClass = [
+                                            'pending' => 'bg-warning-subtle text-warning-emphasis',
+                                            'diproses' => 'bg-info-subtle text-info-emphasis',
+                                            'dikonfirmasi' => 'bg-success-subtle text-success-emphasis',
+                                            'selesai' => 'bg-primary-subtle text-primary-emphasis',
+                                            'dibatalkan' => 'bg-secondary-subtle text-secondary-emphasis',
+                                        ][$item->status] ?? 'bg-secondary-subtle text-secondary-emphasis';
+                                    @endphp
+                                    <span class="badge {{ $statusClass }}">
+                                        {{ ucfirst($item->status) }}
+                                    </span>
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5" class="text-center py-4 text-muted">
+                                <td colspan="6" class="text-center py-4 text-muted">
                                     Belum ada riwayat booking, silakan buat booking terlebih dahulu.
                                 </td>
                             </tr>
