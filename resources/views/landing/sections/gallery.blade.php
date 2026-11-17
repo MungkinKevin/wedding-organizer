@@ -34,11 +34,11 @@
 
                 <article class="group relative isolate overflow-hidden border border-white/15 bg-white/10 {{ $galleryLayout }}">
                     <img
-                        src="{{ asset('storage/' . $galeri->photo) }}"
-                        alt="{{ $galeri->title }}"
-                        class="absolute inset-0 h-full w-full object-cover object-[center_32%] transition duration-700 ease-out group-hover:scale-105"
-                        loading="lazy"
-                    >
+                        src="{{ asset('image/' . $galeri->photo) }}"
+                 alt="{{ $galeri->title }}"
+                 class="absolute inset-0 h-full w-full object-cover object-[center_32%] transition duration-700 ease-out group-hover:scale-105"
+                 loading="lazy"
+                 >
                     <div class="absolute inset-0 bg-gradient-to-t from-[#21121a]/90 via-[#21121a]/10 to-transparent opacity-90 transition duration-300 group-hover:opacity-100"></div>
                     <div class="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-4 sm:p-5 lg:p-6">
                         <div>

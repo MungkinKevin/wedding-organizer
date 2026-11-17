@@ -91,7 +91,7 @@
                             @js($paket->description),
                             @js(number_format($paket->price, 0, ',', '.')),
                             @js(array_values($fasilitas)),
-                            @js(route('booking.create', $paket->id))
+                           @js(route('landing.booking.create', $paket->id))
                         )"
                         class="mt-8 w-full border px-5 py-4 text-xs font-semibold uppercase tracking-[0.16em] transition
 

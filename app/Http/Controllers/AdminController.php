@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Paket;
 use App\Models\Testimoni;
 use App\Models\Booking;
@@ -25,7 +24,11 @@ class AdminController extends Controller
             ->sum('final_price');
 
         $bookingsAktif = Booking::with(['user', 'paket'])
-            ->whereIn('status', ['pending', 'diproses', 'dikonfirmasi'])
+            ->whereIn('status', [
+                'pending',
+                'diproses',
+                'dikonfirmasi'
+            ])
             ->latest()
             ->take(10)
             ->get();
@@ -35,9 +38,9 @@ class AdminController extends Controller
             'totalBooking',
             'totalPendingBooking',
             'totalTestimoni',
-            'bookingsAktif',
             'totalBookingSelesai',
-            'totalPendapatan'
+            'totalPendapatan',
+            'bookingsAktif'
         ));
     }
 }

@@ -1,105 +1,228 @@
 
-{{-- Kolom Status --}}
-<td>
-    <span class="badge
-        @if ($booking->status == 'pending') bg-warning text-dark
-        @elseif ($booking->status == 'diproses') bg-info text-dark
-        @elseif ($booking->status == 'dikonfirmasi') bg-primary
-        @elseif ($booking->status == 'selesai') bg-success
-        @else bg-danger
-        @endif">
-        {{ ucfirst($booking->status) }}
-    </span>
+@extends('layouts.app-admin')
 
-    {{-- Form Ubah Status --}}
-    <form action="{{ route('admin.booking.updateStatus', $booking->id) }}"
-          method="POST"
-          class="mt-2">
-        @csrf
-        @method('PATCH')
+@section('title', 'Dashboard Admin')
 
-        <select name="status" class="form-select form-select-sm mb-2">
-            <option value="pending"
-                {{ $booking->status == 'pending' ? 'selected' : '' }}>
-                Pending
-            </option>
+@section('content')
 
-            <option value="diproses"
-                {{ $booking->status == 'diproses' ? 'selected' : '' }}>
-                Diproses
-            </option>
+<div class="container-fluid">
 
-            <option value="dikonfirmasi"
-                {{ $booking->status == 'dikonfirmasi' ? 'selected' : '' }}>
-                Dikonfirmasi
-            </option>
-
-            <option value="selesai"
-                {{ $booking->status == 'selesai' ? 'selected' : '' }}>
-                Selesai
-            </option>
-
-            <option value="dibatalkan"
-                {{ $booking->status == 'dibatalkan' ? 'selected' : '' }}>
-                Dibatalkan
-            </option>
-        </select>
-
-        <button type="submit" class="btn btn-sm btn-primary w-100">
-            Simpan Status
-        </button>
-    </form>
-</td>
-
-{{-- Kolom Catatan Admin --}}
-<td style="min-width: 180px;">
-    <form id="details-{{ $booking->id }}"
-          action="{{ route('admin.booking.updateDetails', $booking->id) }}"
-          method="POST">
-        @csrf
-        @method('PATCH')
-
-        <textarea name="notes"
-                  class="form-control form-control-sm"
-                  rows="2"
-                  placeholder="Catatan admin">{{ $booking->notes }}</textarea>
-    </form>
-</td>
-
-{{-- Kolom Harga Final --}}
-<td style="min-width: 150px;">
-    <input type="number"
-           name="final_price"
-           form="details-{{ $booking->id }}"
-           class="form-control form-control-sm"
-           min="0"
-           step="0.01"
-           value="{{ $booking->final_price }}"
-           placeholder="Harga final">
-
-    <div class="mt-2">
-        @if ($booking->final_price !== null)
-            <strong class="text-success">
-                Rp {{ number_format($booking->final_price, 0, ',', '.') }}
-            </strong>
-        @else
-            <span class="text-muted">Belum ditentukan</span>
-        @endif
+    {{-- Judul Dashboard --}}
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h3 class="fw-bold mb-1">Dashboard Admin</h3>
+            <p class="text-muted mb-0">Selamat datang di halaman dashboard Wedding Organizer.</p>
+        </div>
     </div>
-</td>
 
-{{-- Kolom Aksi --}}
-<td class="text-center">
-    <button type="submit"
-            form="details-{{ $booking->id }}"
-            class="btn btn-sm btn-success text-nowrap mb-2">
-        <i class="bi bi-save me-1"></i>
-        Simpan Detail
-    </button>
+    {{-- Statistik Dashboard --}}
+    <div class="row g-3 mb-4">
 
-    <a href="{{ route('admin.booking.edit', $booking->id) }}"
-       class="btn btn-sm btn-primary text-nowrap">
-        <i class="bi bi-pencil-square me-1"></i>
-        Edit Booking
-    </a>
-</td>
+        {{-- Total Paket --}}
+        <div class="col-md-6 col-xl-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="text-muted mb-1">Total Paket</p>
+                            <h3 class="fw-bold mb-0">{{ $totalPaket }}</h3>
+                        </div>
+                        <div class="bg-primary bg-opacity-10 text-primary rounded p-3">
+                            <i class="bi bi-box-seam fs-3"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Total Booking --}}
+        <div class="col-md-6 col-xl-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="text-muted mb-1">Total Booking</p>
+                            <h3 class="fw-bold mb-0">{{ $totalBooking }}</h3>
+                        </div>
+                        <div class="bg-info bg-opacity-10 text-info rounded p-3">
+                            <i class="bi bi-calendar-check fs-3"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Booking Pending --}}
+        <div class="col-md-6 col-xl-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="text-muted mb-1">Booking Pending</p>
+                            <h3 class="fw-bold mb-0">{{ $totalPendingBooking }}</h3>
+                        </div>
+                        <div class="bg-warning bg-opacity-10 text-warning rounded p-3">
+                            <i class="bi bi-clock-history fs-3"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Total Testimoni --}}
+        <div class="col-md-6 col-xl-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="text-muted mb-1">Total Testimoni</p>
+                            <h3 class="fw-bold mb-0">{{ $totalTestimoni }}</h3>
+                        </div>
+                        <div class="bg-success bg-opacity-10 text-success rounded p-3">
+                            <i class="bi bi-chat-square-text fs-3"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    {{-- Statistik Pendapatan --}}
+    <div class="row g-3 mb-4">
+
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <p class="text-muted mb-1">Booking Selesai</p>
+                    <h3 class="fw-bold text-success mb-0">
+                        {{ $totalBookingSelesai }}
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <p class="text-muted mb-1">Total Pendapatan</p>
+                    <h3 class="fw-bold text-primary mb-0">
+                        Rp {{ number_format($totalPendapatan, 0, ',', '.') }}
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    {{-- Tabel Booking Aktif --}}
+    <div class="card border-0 shadow-sm">
+
+        <div class="card-header bg-white py-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="fw-bold mb-0">Booking Aktif</h5>
+
+                <a href="{{ route('admin.booking.index') }}"
+                   class="btn btn-sm btn-outline-primary">
+                    Lihat Semua Booking
+                </a>
+            </div>
+        </div>
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+
+                <table class="table table-bordered table-hover align-middle">
+
+                    <thead class="table-light">
+                        <tr>
+                            <th style="width: 5%">No</th>
+                            <th>Nama User</th>
+                            <th>Paket</th>
+                            <th>Status</th>
+                            <th>Catatan</th>
+                            <th>Harga Final</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @forelse ($bookingsAktif as $booking)
+
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+
+                                <td>
+                                    {{ $booking->user->name ?? '-' }}
+                                </td>
+
+                                <td>
+                                    {{ $booking->paket->nama_paket ?? '-' }}
+                                </td>
+
+                                {{-- Kolom Status --}}
+                                <td>
+                                    <span class="badge
+                                        @if ($booking->status == 'pending')
+                                            bg-warning text-dark
+                                        @elseif ($booking->status == 'diproses')
+                                            bg-info text-dark
+                                        @elseif ($booking->status == 'dikonfirmasi')
+                                            bg-primary
+                                        @elseif ($booking->status == 'selesai')
+                                            bg-success
+                                        @else
+                                            bg-danger
+                                        @endif">
+
+                                        {{ ucfirst($booking->status) }}
+
+                                    </span>
+                                </td>
+
+                                {{-- Kolom Catatan --}}
+                                <td>
+                                    {{ $booking->notes ?? '-' }}
+                                </td>
+
+                                {{-- Kolom Harga --}}
+                                <td>
+                                    Rp {{ number_format($booking->final_price ?? 0, 0, ',', '.') }}
+                                </td>
+
+                                {{-- Kolom Aksi --}}
+                                <td>
+                                    <a href="{{ route('admin.booking.edit', $booking->id) }}"
+                                       class="btn btn-sm btn-primary">
+                                        <i class="bi bi-pencil-square"></i>
+                                        Edit Booking
+                                    </a>
+                                </td>
+                            </tr>
+
+                        @empty
+
+                            <tr>
+                                <td colspan="7" class="text-center text-muted py-4">
+                                    <i class="bi bi-inbox fs-3 d-block mb-2"></i>
+                                    Belum ada booking aktif.
+                                </td>
+                            </tr>
+
+                        @endforelse
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@endsection

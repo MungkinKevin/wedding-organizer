@@ -6,9 +6,13 @@
 
             {{-- Logo --}}
             <a href="/" class="flex items-center gap-3">
-                <span class="flex h-11 w-11 items-center justify-center border border-champagne text-lg font-serif text-champagne">
-                    WS
-                </span>
+                <div class="flex h-11 w-11 items-center justify-center border border-champagne">
+                    <img
+                    src="{{ asset('image/logo copy.png') }}"
+                    alt="Logo WO Satria"
+                    class="h-full w-full object-contain p-1"
+                    >
+                </div>
                 <div>
                     <div class="font-serif text-lg tracking-[0.18em] text-ink sm:text-xl">
                         WO SATRIA
