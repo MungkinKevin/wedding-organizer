@@ -14,15 +14,16 @@ class AdminBookingController extends Controller
     {
         $bookings = Booking::with(['user', 'paket'])
             ->orderByRaw("
-                CASE status
+                CASE LOWER(TRIM(status))
                     WHEN 'pending' THEN 1
                     WHEN 'dikonfirmasi' THEN 2
                     WHEN 'diproses' THEN 3
                     WHEN 'selesai' THEN 4
                     WHEN 'dibatalkan' THEN 5
                     ELSE 6
-                END
+                END ASC
             ")
+            ->orderBy('event_date', 'asc')
             ->orderByDesc('created_at')
             ->paginate(10)
             ->withQueryString();
@@ -70,10 +71,14 @@ class AdminBookingController extends Controller
 
         $booking->update($validated);
 
-        // Kirim notifikasi jika status berubah
-        if ($oldStatus !== $booking->status && $booking->user) {
-            Mail::to($booking->user->email)
-                ->send(new BookingStatusNotification($booking));
+        // Kirim email jika status berubah
+        if ($oldStatus !== $booking->status && $booking->user && $booking->user->email) {
+            try {
+                Mail::to($booking->user->email)
+                    ->send(new BookingStatusNotification($booking));
+            } catch (\Exception $e) {
+                \Log::error('Gagal mengirim email status booking: ' . $e->getMessage());
+            }
         }
 
         return redirect()

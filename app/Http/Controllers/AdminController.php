@@ -29,7 +29,8 @@ class AdminController extends Controller
                 'diproses',
                 'dikonfirmasi'
             ])
-            ->latest()
+            ->orderBy('event_date', 'asc')
+            ->latest('created_at')
             ->take(10)
             ->get();
 

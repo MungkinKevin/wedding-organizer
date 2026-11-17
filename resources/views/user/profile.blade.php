@@ -22,11 +22,6 @@
                     </div>
 
                     <div class="d-grid gap-2 col-10 mx-auto">
-                        <button class="btn btn-outline-dark btn-sm py-2 rounded-pill fw-semibold" style="font-size: 13px;" data-bs-toggle="modal" data-bs-target="#gantiFotoModal">
-                            GANTI FOTO 
-                        </button>
-   
-                        
                         
                         <button class="btn btn-outline-dark btn-sm py-2 rounded-pill fw-semibold" style="font-size: 13px;" data-bs-toggle="modal" data-bs-target="#editProfilModal">
                             EDIT PROFIL
@@ -98,30 +93,7 @@
             </div>
         </div>
     </div>
-    <!-- Buat ganti foto -->
-<div class="modal fade" id="gantiFotoModal" tabindex="-1" aria-labelledby="gantiFotoModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content rounded-4 border-0">
-            <div class="modal-header border-bottom-0 pb-0">
-                <h5 class="modal-title fw-bold" id="gantiFotoModalLabel">Ganti Foto Profil</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="{{ route('user.profile.photo') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="modal-body text-center">
-                    <div class="mb-3">
-                        <label for="avatar" class="form-label text-muted small">Pilih foto baru (JPG, PNG, max 2MB)</label>
-                        <input type="file" class="form-control" id="avatar" name="avatar" accept="image/*" required>
-                    </div>
-                </div>
-                <div class="modal-footer border-top-0 pt-0">
-                    <button type="button" class="btn btn-light rounded-pill px-4" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn text-white rounded-pill px-4" style="background-color: #e83e8c;">Upload Foto</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+   
 
 <!-- Buat ubah sandi -->
 <div class="modal fade" id="ubahSandiModal" tabindex="-1" aria-labelledby="ubahSandiModalLabel" aria-hidden="true">

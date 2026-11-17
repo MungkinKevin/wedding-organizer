@@ -18,7 +18,7 @@ class UserDashboardController extends Controller
             ->latest()
             ->get();
 
-        // 2. Mengambil data untuk notifikasi dropdown (5 data terbaru)
+        // 2. Mengambil data untuk notifikasi dropdown
         $notifications = Booking::with('paket')
             ->where('user_id', $userId)
             ->latest()
