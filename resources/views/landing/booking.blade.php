@@ -83,10 +83,22 @@
 
                         <div class="grid gap-4">
                             <div>
-                                <label for="contact_phone" class="mb-2 block text-sm font-medium text-ink">Nomor telepon / WhatsApp <span class="text-rose">*</span></label>
-                                <input id="contact_phone" name="contact_phone" type="tel" value="{{ old('contact_phone') }}" required maxlength="20" autocomplete="tel" inputmode="tel" placeholder="Contoh: 0812 3456 7890"
-                                       class="w-full border border-champagne-light bg-[#fdfbf9] px-4 py-3 text-sm text-ink outline-none transition placeholder:text-muted/60 focus:border-champagne focus:ring-2 focus:ring-champagne/15">
-                                @error('contact_phone') <p class="mt-1 text-xs text-red-600">{{ $message }}</p> @enderror
+                                <label for="contact_phone" class="mb-2 block text-sm font-medium text-ink">
+                                    Nomor telepon / WhatsApp
+                                </label>
+
+                                <input
+                                    id="contact_phone"
+                                    name="contact_phone"
+                                    type="tel"
+                                    value="{{ auth()->user()->phone ?? '' }}"
+                                    readonly
+                                    class="w-full border border-champagne-light bg-gray-100 px-4 py-3 text-sm text-ink outline-none"
+                                >
+
+                                <p class="mt-1 text-xs text-muted">
+                                    Nomor telepon diambil otomatis dari profil akun Anda.
+                                </p>
                             </div>
                             <div>
                                 <label for="contact_address" class="mb-2 block text-sm font-medium text-ink">Alamat domisili <span class="text-rose">*</span></label>
